@@ -21,13 +21,8 @@ import co.tryterra.terraclient.impl.v2.TerraClientV2Impl;
 import org.jetbrains.annotations.NotNull;
 
 public class TerraClientFactory {
-    private static TerraClientV2 client = null;
-
     @NotNull
     public static TerraClientV2 getClientV2(String xApiKey, String devId) {
-        if (client == null) {
-            client = new TerraClientV2Impl(xApiKey, devId);
-        }
-        return client;
+        return new TerraClientV2Impl(xApiKey, devId);
     }
 }
