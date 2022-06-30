@@ -17,7 +17,7 @@ The official [Terra](https://tryterra.co) Java client library.
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "co.tryterra:terra-client:0.0.1"
+implementation "co.tryterra:terra-client:<version>"
 ```
 
 ### Maven users
@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>co.tryterra</groupId>
     <artifactId>terra-client</artifactId>
-    <version>0.0.1</version>
+    <version>${terra-client.version}</version>
 </dependency>
 ```
 
