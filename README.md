@@ -1,12 +1,8 @@
 # Terra Java Client Library
 
----
-
 The official [Terra](https://tryterra.co) Java client library.
 
 ## Installation
-
----
 
 ### Requirements
 
@@ -34,9 +30,7 @@ Add this dependency to your project's POM:
 
 ## Usage
 
----
-
-TerraExample.java
+`TerraExample.java`
 
 ```java
 import co.tryterra.terraclient.TerraClientFactory;
