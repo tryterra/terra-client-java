@@ -29,29 +29,18 @@ import org.jetbrains.annotations.Nullable;
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Athlete {
-    @Nullable
     @JsonProperty("first_name")
     private String firstName;
-    @Nullable
     @JsonProperty("last_name")
     private String lastName;
-    @Nullable
     private String gender;
-    @Nullable
     private String sex;
-    @Nullable
     @JsonProperty("date_of_birth")
     private String dateOfBirth;
-    @Nullable
     private String bio;
-    @Nullable
     private String email;
-    @Nullable
     private String city;
-    @Nullable
     private String state;
-    @Nullable
     private String country;
-    @Nullable
     private Integer age;
 }

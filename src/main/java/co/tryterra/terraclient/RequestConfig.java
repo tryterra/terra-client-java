@@ -16,53 +16,111 @@
 
 package co.tryterra.terraclient;
 
-import okhttp3.HttpUrl;
+import co.tryterra.terraclient.api.User;
 
 import java.time.Instant;
 
+/**
+ * Class representing request configuration parameters used when making calls to
+ * the Terra API.
+ */
 public class RequestConfig {
     private final Instant startTime;
     private final Instant endTime;
     private final boolean toWebhook;
-    private final Boolean withSamples;
+    private final Samples withSamples;
 
-    RequestConfig(Instant startTime, Instant endTime, boolean toWebhook, Boolean withSamples) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.toWebhook = toWebhook;
-        this.withSamples = withSamples;
+    RequestConfig(Builder builder) {
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.toWebhook = builder.toWebhook;
+        this.withSamples = builder.withSamples;
     }
 
+    /**
+     * Enum representing all possible values for the {@code with_samples} query parameter.
+     */
+    public enum Samples {
+        /**
+         * Include samples in the response data.
+         */
+        INCLUDE,
+        /**
+         * Exclude samples from the response data.
+         */
+        EXCLUDE,
+        /**
+         * Use the account default. This is dictated by whether the developer account
+         * has the {@code samples} scope enabled on the developer dashboard.
+         */
+        ACCOUNT_DEFAULT
+    }
+
+    /**
+     * Builder class for {@link RequestConfig} instances.
+     */
     public static class Builder {
         private Instant startTime = null;
         private Instant endTime = null;
-        private boolean toWebhook = false;
-        private Boolean withSamples = null;
+        private boolean toWebhook = true;
+        private Samples withSamples = Samples.ACCOUNT_DEFAULT;
 
         Builder() {}
 
+        /**
+         * Create a {@link RequestConfig} object from this builder.
+         *
+         * @return the created {@link RequestConfig} object
+         */
         public RequestConfig build() {
-            return new RequestConfig(
-                    startTime, endTime, toWebhook, withSamples
-            );
+            return new RequestConfig(this);
         }
 
+        /**
+         * Set the start time to be used for API requests made using this configuration. This
+         * <b>must</b> be set for all requests that allow configuration to be passed, other than
+         * {@link co.tryterra.terraclient.api.TerraClientV2#getAthleteForUser(User, RequestConfig)}.
+         *
+         * @param value {@link Instant} to set the {@code start_date} parameter to
+         * @return this builder object for method chaining
+         */
         public Builder startTime(Instant value) {
             this.startTime = value;
             return this;
         }
 
+        /**
+         * Set the end time to be used for API requests made using this configuration.
+         *
+         * @param value {@link Instant} to set the {@code end_date} parameter to
+         * @return this builder object for method chaining
+         */
         public Builder endTime(Instant value) {
             this.endTime = value;
             return this;
         }
 
+        /**
+         * Set whether the data returned from the API request will be in the response body
+         * or sent to the developer webhook. If this is not specified, it will default to
+         * {@code true} (the data will be sent to webhook).
+         *
+         * @param value boolean to set the {@code to_webhook} parameter to
+         * @return this builder object for method chaining
+         */
         public Builder toWebhook(boolean value) {
             this.toWebhook = value;
             return this;
         }
 
-        public Builder withSamples(boolean value) {
+        /**
+         * Set whether the data returned from the API request will include sample data. If
+         * this is not specified, it will default to {@link Samples#ACCOUNT_DEFAULT}.
+         *
+         * @param value {@link Samples} enum value to set the {@code with_samples} parameter to
+         * @return this builder object for method chaining
+         */
+        public Builder withSamples(Samples value) {
             this.withSamples = value;
             return this;
         }
@@ -72,44 +130,45 @@ public class RequestConfig {
         return new Builder();
     }
 
-    public static RequestConfig defaultConfig(Instant startTime) {
-        return RequestConfig.builder().startTime(startTime).build();
-    }
-
-    public static RequestConfig defaultConfig() {
-        return RequestConfig.builder().build();
-    }
-
+    /**
+     * The unix timestamp that will be sent as the start time for the API request. This
+     * will be used in the {@code start_date} query parameter.
+     *
+     * @return value for the {@code start_date} query parameter
+     */
     public Instant getStartTime() {
         return startTime;
     }
 
+    /**
+     * The unix timestamp that will be sent as the end time for the API request. This
+     * will be used in the {@code end_date} query parameter.
+     *
+     * @return value for the {@code end_date} query parameter
+     */
     public Instant getEndTime() {
         return endTime;
     }
 
-    public Boolean getWithSamples() {
+    /**
+     * The value that will be sent to indicate whether the API should return data
+     * samples with the response body. This will be used in the {@code with_samples} query
+     * parameter.
+     *
+     * @return value for the {@code with_samples} query parameter
+     */
+    public Samples getWithSamples() {
         return withSamples;
     }
 
+    /**
+     * The value that will be sent to indicate whether the API should send the data
+     * directly to the developer's webhook URL. This will be used in the {@code to_webhook}
+     * query parameter.
+     *
+     * @return value for the {@code to_webhook} query parameter
+     */
     public boolean isToWebhook() {
         return toWebhook;
-    }
-
-    public void addQueryToUrl(HttpUrl.Builder builder) {
-        if (startTime == null) {
-            throw new RuntimeException("startTime cannot be null for this request");
-        }
-
-        builder
-                .addQueryParameter("start_date", String.valueOf(this.startTime.getEpochSecond()))
-                .addQueryParameter("to_webhook", this.toWebhook ? "true" : "false");
-
-        if (this.endTime != null) {
-            builder.addQueryParameter("end_date", String.valueOf(this.endTime.getEpochSecond()));
-        }
-        if (this.withSamples != null) {
-            builder.addQueryParameter("with_samples", this.withSamples ? "true" : "false");
-        }
     }
 }

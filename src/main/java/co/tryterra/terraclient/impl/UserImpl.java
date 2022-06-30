@@ -16,62 +16,54 @@
 
 package co.tryterra.terraclient.impl;
 
-import co.tryterra.terraclient.impl.v2.RestClientV2;
 import co.tryterra.terraclient.api.User;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class UserImpl implements User {
-    private final String id;
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
-    private String provider;
-    private OffsetDateTime lastWebhookUpdate;
+    private final String id;
+    private final String provider;
+    private final OffsetDateTime lastWebhookUpdate;
 
     public UserImpl(String id) {
         this.id = id;
+        this.provider = null;
+        this.lastWebhookUpdate = null;
     }
 
-    public synchronized void setProvider(String provider) {
-        this.provider = provider;
+    @JsonCreator
+    public UserImpl(
+            @JsonProperty("user") JsonNode user, @JsonProperty("user_id") String id,
+            @JsonProperty("provider") String provider, @JsonProperty("last_webhook_update") String lastWebhookUpdate
+    ) {
+        this.id = id == null ? user.get("user_id").asText() : id;
+        this.provider = provider == null ? user.get("provider").asText() : provider;
+
+        String lastWhUpdate = lastWebhookUpdate;
+        if (lastWhUpdate == null && !user.get("last_webhook_update").isNull()) {
+            lastWhUpdate = user.get("last_webhook_update").asText();
+        }
+        this.lastWebhookUpdate = lastWhUpdate == null ? null : OffsetDateTime.parse(lastWhUpdate, dateTimeFormatter);
     }
 
-    public synchronized void setLastWebhookUpdate(OffsetDateTime lastWebhookUpdate) {
-        this.lastWebhookUpdate = lastWebhookUpdate;
-    }
-
-    @NotNull
     @Override
     public String getId() {
         return this.id;
     }
 
-    @NotNull
     @Override
     public String getProvider() {
         return this.provider;
     }
 
-    @Nullable
     @Override
     public OffsetDateTime getLastWebhookUpdate() {
         return this.lastWebhookUpdate;
-    }
-
-    @NotNull
-    public static UserImpl fromJsonNode(JsonNode node, RestClientV2 restClient) {
-        var usr = node.get("user") == null ? node : node.get("user");
-
-        var created = new UserImpl(usr.get("user_id").asText());
-        created.setProvider(usr.get("provider").asText());
-
-        var lastWhUpdate = usr.get("last_webhook_update");
-        if (lastWhUpdate != null && !lastWhUpdate.isNull()) {
-            created.setLastWebhookUpdate(OffsetDateTime.parse(lastWhUpdate.asText(), restClient.getDateTimeFormatter()));
-        }
-
-        return created;
     }
 }

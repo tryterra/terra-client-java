@@ -16,13 +16,10 @@
 
 package co.tryterra.terraclient.api;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.time.OffsetDateTime;
 
 /**
- * Representation of a Terra user.
+ * Interface representing a Terra user.
  */
 public interface User {
     /**
@@ -31,7 +28,6 @@ public interface User {
      *
      * @return the user's ID
      */
-    @NotNull
     String getId();
 
     /**
@@ -40,7 +36,6 @@ public interface User {
      *
      * @return the user's provider, or {@code null} if no data has been requested for the user yet
      */
-    @Nullable
     String getProvider();
 
     /**
@@ -49,6 +44,5 @@ public interface User {
      *
      * @return the user's last webhook update, or {@code null} if no data has been requested for the user yet
      */
-    @Nullable
     OffsetDateTime getLastWebhookUpdate();
 }

@@ -20,7 +20,6 @@ import co.tryterra.terraclient.RequestConfig;
 import co.tryterra.terraclient.api.TerraApiResponse;
 import co.tryterra.terraclient.api.TerraClientV2;
 import co.tryterra.terraclient.api.User;
-import co.tryterra.terraclient.impl.UserImpl;
 import co.tryterra.terraclient.models.Athlete;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
@@ -28,69 +27,100 @@ import co.tryterra.terraclient.models.v2.daily.Daily;
 import co.tryterra.terraclient.models.v2.menstruation.Menstruation;
 import co.tryterra.terraclient.models.v2.nutrition.Nutrition;
 import co.tryterra.terraclient.models.v2.sleep.Sleep;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.concurrent.Future;
 
 public class TerraClientV2Impl implements TerraClientV2 {
     private final RestClientV2 restClient;
 
-    public TerraClientV2Impl(String xApiKey, String devId) {
-        this.restClient = new RestClientV2(xApiKey, devId);
+    private final RequestConfig defaultRequestConfig;
+
+    public TerraClientV2Impl(String xApiKey, String devId, String apiUrl, RequestConfig requestConfig) {
+        if (apiUrl == null) {
+            this.restClient = new RestClientV2(xApiKey, devId);
+        } else {
+            this.restClient = new RestClientV2(xApiKey, devId, apiUrl);
+        }
+        this.defaultRequestConfig = requestConfig;
     }
 
-    @NotNull
     @Override
-    public User userFromId(@NotNull String id) {
-        return new UserImpl(id);
-    }
-
-    @NotNull
-    @Override
-    public List<User> getAllUsers() {
+    public Future<? extends TerraApiResponse<? extends User>> getAllUsers() {
         return restClient.getAllUsers();
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Athlete>> getAthleteForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<? extends TerraApiResponse<? extends User>> getUser(String userId) {
+        return restClient.getUser(userId);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Athlete>> getAthleteForUser(User user) {
+        return this.getAthleteForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Athlete>> getAthleteForUser(User user, RequestConfig requestConfig) {
         return restClient.getAthleteForUser(user, requestConfig);
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Activity>> getActivityForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<TerraApiResponse<Activity>> getActivityForUser(User user) {
+        return this.getActivityForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Activity>> getActivityForUser(User user, RequestConfig requestConfig) {
         return restClient.getActivityForUser(user, requestConfig);
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Body>> getBodyForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<TerraApiResponse<Body>> getBodyForUser(User user) {
+        return this.getBodyForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Body>> getBodyForUser(User user, RequestConfig requestConfig) {
         return restClient.getBodyForUser(user, requestConfig);
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Daily>> getDailyForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<TerraApiResponse<Daily>> getDailyForUser(User user) {
+        return this.getDailyForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Daily>> getDailyForUser(User user, RequestConfig requestConfig) {
         return restClient.getDailyForUser(user, requestConfig);
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user) {
+        return this.getMenstruationForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, RequestConfig requestConfig) {
         return restClient.getMenstruationForUser(user, requestConfig);
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user) {
+        return this.getNutritionForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, RequestConfig requestConfig) {
         return restClient.getNutritionForUser(user, requestConfig);
     }
 
-    @NotNull
     @Override
-    public Future<TerraApiResponse<Sleep>> getSleepForUser(@NotNull User user, @NotNull RequestConfig requestConfig) {
+    public Future<TerraApiResponse<Sleep>> getSleepForUser(User user) {
+        return this.getSleepForUser(user, this.defaultRequestConfig);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Sleep>> getSleepForUser(User user, RequestConfig requestConfig) {
         return restClient.getSleepForUser(user, requestConfig);
     }
 }

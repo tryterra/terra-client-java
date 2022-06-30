@@ -18,11 +18,63 @@ package co.tryterra.terraclient;
 
 import co.tryterra.terraclient.api.TerraClientV2;
 import co.tryterra.terraclient.impl.v2.TerraClientV2Impl;
-import org.jetbrains.annotations.NotNull;
 
+/**
+ * A factory for creating a Terra client instance, which will be used for all
+ * requests to the Terra REST API.
+ */
 public class TerraClientFactory {
-    @NotNull
+    /**
+     * Creates a new {@link TerraClientV2} instance using the authentication information
+     * provided, as well as the default request config. Requests will be made
+     * to the default API base URL ({@code https://api.tryterra.co/v2}).
+     *
+     * @param xApiKey your Terra API key
+     * @param devId your Terra developer ID
+     * @return the created instance
+     */
     public static TerraClientV2 getClientV2(String xApiKey, String devId) {
-        return new TerraClientV2Impl(xApiKey, devId);
+        return new TerraClientV2Impl(xApiKey, devId, null, RequestConfig.builder().build());
+    }
+
+    /**
+     * Creates a new {@link TerraClientV2} instance using the authentication information
+     * provided, as well as the given request config. Requests will be made
+     * to the default API base URL ({@code https://api.tryterra.co/v2}).
+     *
+     * @param xApiKey your Terra API key
+     * @param devId your Terra developer ID
+     * @param requestConfig the per-request configuration to use
+     * @return the created instance
+     */
+    public static TerraClientV2 getClientV2(String xApiKey, String devId, RequestConfig requestConfig) {
+        return new TerraClientV2Impl(xApiKey, devId, null, requestConfig);
+    }
+
+    /**
+     * Creates a new {@link TerraClientV2} instance using the authentication information
+     * provided, as well as the default request config. Requests will be made to the provided API base URL.
+     *
+     * @param xApiKey your Terra API key
+     * @param devId your Terra developer ID
+     * @param apiUrl the API base url to make requests to
+     * @return the created instance
+     */
+    public static TerraClientV2 getClientV2(String xApiKey, String devId, String apiUrl) {
+        return new TerraClientV2Impl(xApiKey, devId, apiUrl, RequestConfig.builder().build());
+    }
+
+    /**
+     * Creates a new {@link TerraClientV2} instance using the authentication information
+     * provided, as well as the given request config. Requests will be made to the provided API base URL.
+     *
+     * @param xApiKey your Terra API key
+     * @param devId your Terra developer ID
+     * @param apiUrl the API base url to make requests to
+     * @param requestConfig the per-request configuration to use
+     * @return the created instance
+     */
+    public static TerraClientV2 getClientV2(String xApiKey, String devId, String apiUrl, RequestConfig requestConfig) {
+        return new TerraClientV2Impl(xApiKey, devId, apiUrl, requestConfig);
     }
 }

@@ -16,12 +16,12 @@
 
 package co.tryterra.terraclient.exceptions;
 
-public class ResponseParsingException extends TerraException {
-    public ResponseParsingException(Throwable throwable) {
-        super(throwable);
+public class TerraRuntimeException extends RuntimeException {
+    public TerraRuntimeException(String text) {
+        super(text);
     }
 
-    public ResponseParsingException(String text) {
-        super(text);
+    public TerraRuntimeException(Throwable throwable) {
+        super(throwable);
     }
 }

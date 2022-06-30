@@ -17,16 +17,14 @@
 package co.tryterra.terraclient.impl;
 
 import co.tryterra.terraclient.api.TerraApiResponse;
+import co.tryterra.terraclient.exceptions.TerraRuntimeException;
 import co.tryterra.terraclient.impl.v2.RestClientV2;
 import co.tryterra.terraclient.api.User;
 import co.tryterra.terraclient.exceptions.ResponseParsingException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.Response;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,30 +32,29 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class ResponseBodyParserCallbackFuture<T> implements Callback {
-    private static  final Logger logger = LoggerFactory.getLogger(ResponseBodyParserCallbackFuture.class);
-
-    private final CompletableFuture<TerraApiResponse<T>> future = new CompletableFuture<>();
+public class ResponseBodyParser<T> {
+    private static  final Logger logger = LoggerFactory.getLogger(ResponseBodyParser.class);
 
     private final User user;
     private final String key;
     private final Class<T> parseTo;
     private final RestClientV2 restClient;
 
-    public ResponseBodyParserCallbackFuture(User user, String key, Class<T> parseTo, RestClientV2 restClient) {
+    public ResponseBodyParser(User user, String key, Class<T> parseTo, RestClientV2 restClient) {
         this.user = user;
         this.key = key;
         this.parseTo = parseTo;
         this.restClient = restClient;
     }
 
-    public Future<TerraApiResponse<T>> getInner() {
-        return future;
+    @Data
+    static class ParsedResponse<T> {
+        private final JsonNode rawBody;
+        private final List<T> parsedBody;
+        private final User user;
     }
 
     private T jsonNodeToObject(JsonNode node) {
@@ -75,33 +72,31 @@ public class ResponseBodyParserCallbackFuture<T> implements Callback {
         }
 
         JsonNode rawBody;
-        try {
+        try (response) {
             rawBody = restClient.getObjectMapper().readTree(response.body().string());
-            response.close();
         } catch (IOException ex) {
             throw new ResponseParsingException(ex);
         }
 
         if (!response.isSuccessful()) {
-            return new ParsedResponse<>(rawBody, null);
+            return new ParsedResponse<>(rawBody, null, null);
         }
 
+        User newUser = null;
         if (user != null && rawBody.get("user") != null) {
-            var tempUser = UserImpl.fromJsonNode(rawBody, restClient);
-            var castUser = (UserImpl) user;
-            castUser.setProvider(tempUser.getProvider());
-            castUser.setLastWebhookUpdate(tempUser.getLastWebhookUpdate());
+            newUser = new UserImpl(rawBody.get("user"), null, null, null);
         }
 
         if (rawBody.get(key) == null) {
-            return new ParsedResponse<>(rawBody, null);
+            return new ParsedResponse<>(rawBody, null, newUser);
         }
 
         if (!rawBody.get(key).isArray()) {
             try {
                 return new ParsedResponse<>(
                         rawBody,
-                        List.of(restClient.getObjectMapper().treeToValue(rawBody.get(key), parseTo))
+                        List.of(restClient.getObjectMapper().treeToValue(rawBody.get(key), parseTo)),
+                        newUser
                 );
             } catch (JsonProcessingException ex) {
                 throw new ResponseParsingException(ex);
@@ -109,34 +104,22 @@ public class ResponseBodyParserCallbackFuture<T> implements Callback {
         }
 
         if (rawBody.get(key).isEmpty()) {
-            return new ParsedResponse<>(rawBody, Collections.emptyList());
+            return new ParsedResponse<>(rawBody, Collections.emptyList(), newUser);
         }
 
         var parsed =  StreamSupport.stream(rawBody.get(key).spliterator(), false)
                 .map(this::jsonNodeToObject)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return new ParsedResponse<>(rawBody, parsed);
+        return new ParsedResponse<>(rawBody, parsed, newUser);
     }
 
-    @Data
-    private static class ParsedResponse<T> {
-        private final JsonNode rawBody;
-        private final List<T> parsedBody;
-    }
-
-    @Override
-    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-        future.completeExceptionally(e);
-    }
-
-    @Override
-    public void onResponse(@NotNull Call call, @NotNull Response response) {
+    public TerraApiResponse<T> toTerraApiResponse(Response response) {
         try {
-            ParsedResponse<T> parsed = parseResponse(response);
-            future.complete(new TerraApiResponseImpl<>(response, parsed.getParsedBody(), parsed.getRawBody()));
-        } catch (ResponseParsingException ex) {
-            future.completeExceptionally(ex);
+            var parsed = parseResponse(response);
+            return new TerraApiResponseImpl<>(response, parsed.getParsedBody(), parsed.getRawBody(), user);
+        } catch (ResponseParsingException e) {
+            throw new TerraRuntimeException(e);
         }
     }
 }

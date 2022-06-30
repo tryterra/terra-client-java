@@ -17,17 +17,15 @@
 package co.tryterra.terraclient.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 /**
- * A wrapper class representing any response from Terra's API, containing the
+ * Interface for any response from Terra's API, containing the
  * returned data from the query (if available) as well as the raw, unparsed body
- * as a {@link com.fasterxml.jackson.databind.JsonNode}.
+ * as a {@link JsonNode}.
  *
- * @param <T> The type that the response was parsed to, if possible
+ * @param <T> the type of the response body data
  */
 public interface TerraApiResponse<T> {
     /**
@@ -51,7 +49,6 @@ public interface TerraApiResponse<T> {
      *
      * @return the type of the response payload
      */
-    @NotNull
     String getType();
 
     /**
@@ -60,7 +57,6 @@ public interface TerraApiResponse<T> {
      *
      * @return the message sent with the response payload
      */
-    @Nullable
     String getMessage();
 
     /**
@@ -68,21 +64,19 @@ public interface TerraApiResponse<T> {
      *
      * @return the response body
      */
-    @NotNull
     JsonNode getRawBody();
-
-    /**
-     * Flag indicating whether data was parsed from the response body successfully.
-     *
-     * @return whether parsed data is available
-     */
-    boolean hasParsedData();
 
     /**
      * The data parsed from the response body as a list of Java objects.
      *
      * @return the parsed data
      */
-    @Nullable
     List<T> getParsedData();
+
+    /**
+     * The user that the request fetched data for.
+     *
+     * @return the request's user
+     */
+    User getUser();
 }

@@ -15,16 +15,13 @@
  */
 
 module co.tryterra.terraclient {
-    // Compile time required libraries
     requires static lombok;
     requires static annotations;
 
-    // Runtime required libraries
     requires okhttp3;
     requires com.fasterxml.jackson.databind;
     requires org.slf4j;
 
-    // Public API
     exports co.tryterra.terraclient;
     exports co.tryterra.terraclient.api;
     exports co.tryterra.terraclient.exceptions;

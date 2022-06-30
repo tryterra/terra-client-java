@@ -17,9 +17,9 @@
 package co.tryterra.terraclient.impl;
 
 import co.tryterra.terraclient.api.TerraApiResponse;
+import co.tryterra.terraclient.api.User;
 import com.fasterxml.jackson.databind.JsonNode;
 import okhttp3.Response;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -27,11 +27,13 @@ public class TerraApiResponseImpl<T> implements TerraApiResponse<T> {
     private final Response response;
     private final List<T> parsed;
     private final JsonNode rawBody;
+    private final User user;
 
-    public TerraApiResponseImpl(Response response, List<T> parsed, JsonNode rawBody) {
+    public TerraApiResponseImpl(Response response, List<T> parsed, JsonNode rawBody, User user) {
         this.response = response;
         this.parsed = parsed;
         this.rawBody = rawBody;
+        this.user = user;
     }
 
     @Override
@@ -44,7 +46,6 @@ public class TerraApiResponseImpl<T> implements TerraApiResponse<T> {
         return response.isSuccessful();
     }
 
-    @NotNull
     @Override
     public String getType() {
         return rawBody.get("type").asText();
@@ -55,22 +56,18 @@ public class TerraApiResponseImpl<T> implements TerraApiResponse<T> {
         return rawBody.get("message").asText();
     }
 
-    @NotNull
     @Override
     public JsonNode getRawBody() {
         return rawBody;
     }
 
     @Override
-    public boolean hasParsedData() {
-        return List.of(
-                "athlete", "activity", "body", "daily",
-                "menstruation", "nutrition", "sleep"
-        ).contains(getType());
+    public List<T> getParsedData() {
+        return parsed;
     }
 
     @Override
-    public List<T> getParsedData() {
-        return parsed;
+    public User getUser() {
+        return user;
     }
 }
