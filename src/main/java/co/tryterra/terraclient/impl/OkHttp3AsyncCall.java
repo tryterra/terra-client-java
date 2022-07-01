@@ -19,7 +19,6 @@ package co.tryterra.terraclient.impl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.concurrent.*;
@@ -35,12 +34,12 @@ public class OkHttp3AsyncCall implements Callback, Future<Response> {
     }
 
     @Override
-    public void onResponse(@NotNull Call call, @NotNull Response response) {
+    public void onResponse(Call call, Response response) {
         future.complete(response);
     }
 
     @Override
-    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+    public void onFailure(Call call, IOException e) {
         future.completeExceptionally(e);
     }
 
@@ -57,7 +56,7 @@ public class OkHttp3AsyncCall implements Callback, Future<Response> {
     }
 
     @Override
-    public Response get(long timeout, @NotNull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+    public Response get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
         return future.get(timeout, unit);
     }
 
