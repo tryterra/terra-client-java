@@ -47,9 +47,13 @@ public interface TerraApiResponse<T> {
      * The value of the {@code type} key in the returned response body. This can be
      * used to check whether this response contains parsed data, or if a special case
      * occurred, such as the request being chunked due to being for more than 30 days of data.
+     * <br>
+     * This will only be {@code null} if the request was unsuccessful, i.e. returned a non 2xx
+     * status code (accessible through {@link #getResponseCode()} or {@link #isSuccessful()}).
      *
      * @return the type of the response payload
      */
+    @Nullable
     String getType();
 
     /**
