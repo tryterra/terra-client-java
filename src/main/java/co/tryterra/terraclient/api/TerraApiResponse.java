@@ -16,6 +16,7 @@
 
 package co.tryterra.terraclient.api;
 
+import co.tryterra.terraclient.api.annotations.Nullable;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public interface TerraApiResponse<T> {
     String getMessage();
 
     /**
-     * The raw, unparsed JSON body returned in the response.
+     * The raw, unparsed JSON body returned with the response.
      *
      * @return the response body
      */
@@ -71,6 +72,7 @@ public interface TerraApiResponse<T> {
      *
      * @return the parsed data
      */
+    @Nullable
     List<T> getParsedData();
 
     /**
@@ -78,5 +80,6 @@ public interface TerraApiResponse<T> {
      *
      * @return the request's user
      */
+    @Nullable
     User getUser();
 }

@@ -24,6 +24,7 @@ module co.tryterra.terraclient {
 
     exports co.tryterra.terraclient;
     exports co.tryterra.terraclient.api;
+    exports co.tryterra.terraclient.api.annotations;
     exports co.tryterra.terraclient.exceptions;
     exports co.tryterra.terraclient.models;
     exports co.tryterra.terraclient.models.v2.activity;

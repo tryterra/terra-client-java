@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package co.tryterra.terraclient.api;
-
-import java.time.OffsetDateTime;
-
 /**
- * Interface representing a full Terra user.
+ * This package contains all data models used when deserializing Terra API responses.
+ * <br>
+ * You should assume that every attribute of every class defined in this package
+ * can be {@link co.tryterra.terraclient.api.annotations.Nullable} unless defined
+ * otherwise by the Terra API documentation.
  */
-public interface User extends PartialUser{
-    /**
-     * The provider that this user is registered with.
-     *
-     * @return the user's provider
-     */
-    String getProvider();
-
-    /**
-     * The last time the user's data was attempted to be updated by Terra.
-     *
-     * @return the user's last webhook update
-     */
-    OffsetDateTime getLastWebhookUpdate();
-}
+package co.tryterra.terraclient.models;

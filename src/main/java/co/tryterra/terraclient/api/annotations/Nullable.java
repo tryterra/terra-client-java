@@ -14,25 +14,26 @@
  * limitations under the License.
  */
 
-package co.tryterra.terraclient.api;
+package co.tryterra.terraclient.api.annotations;
 
-import java.time.OffsetDateTime;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Interface representing a full Terra user.
+ * Anything annotated with this annotation may have a {@code null} value.
  */
-public interface User extends PartialUser{
-    /**
-     * The provider that this user is registered with.
-     *
-     * @return the user's provider
-     */
-    String getProvider();
-
-    /**
-     * The last time the user's data was attempted to be updated by Terra.
-     *
-     * @return the user's last webhook update
-     */
-    OffsetDateTime getLastWebhookUpdate();
+@Documented
+@Retention(RUNTIME)
+@Target({
+        ElementType.FIELD,
+        ElementType.METHOD,
+        ElementType.PARAMETER,
+        ElementType.TYPE_PARAMETER,
+        ElementType.TYPE_USE
+})
+public @interface Nullable {
 }

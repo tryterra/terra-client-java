@@ -1,0 +1,39 @@
+name: docs
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ '**.java' ]
+
+jobs:
+  api-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Set up the Java JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Build docs with Maven
+        run: mvn javadoc:javadoc
+
+      - name: Copy to Documentation Website Location
+        run: |
+          cp -rf target/site/apidocs/. gh-pages
+
+      - name: Tidy up the javadocs
+        id: tidy
+        uses: cicirello/javadoc-cleanup@v1
+
+      - name: Log javadoc-cleanup output
+        run: |
+          echo "modified-count = ${{ steps.tidy.outputs.modified-count }}"
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: gh-pages
