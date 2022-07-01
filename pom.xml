@@ -65,7 +65,7 @@
         <repository>
             <id>sonatype-nexus-staging</id>
             <name>Nexus Release Repository</name>
-            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+            <url>https://s01.oss.sonatype.org/content/groups/staging/</url>
         </repository>
     </distributionManagement>
 
