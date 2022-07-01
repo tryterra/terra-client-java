@@ -6,7 +6,7 @@ on:
     paths: [ '**.java' ]
 
 jobs:
-  api-website:
+  javadoc:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
@@ -19,7 +19,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docs with Maven
-        run: ./mvnw javadoc:javadoc
+        run: ./mvnw clean package javadoc:javadoc
 
       - name: Copy to Documentation Website Location
         run: |
