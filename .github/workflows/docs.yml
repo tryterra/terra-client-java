@@ -19,7 +19,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docs with Maven
-        run: ./mvnw clean package javadoc:javadoc
+        run: ./mvnw -B clean package javadoc:javadoc
 
       - name: Copy to Documentation Website Location
         run: |
