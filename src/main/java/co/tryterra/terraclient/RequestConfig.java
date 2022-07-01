@@ -16,23 +16,17 @@
 
 package co.tryterra.terraclient;
 
-import co.tryterra.terraclient.api.User;
-
-import java.time.Instant;
+import java.util.Objects;
 
 /**
  * Class representing request configuration parameters used when making calls to
  * the Terra API.
  */
 public class RequestConfig {
-    private final Instant startTime;
-    private final Instant endTime;
     private final boolean toWebhook;
     private final Samples withSamples;
 
     RequestConfig(Builder builder) {
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
         this.toWebhook = builder.toWebhook;
         this.withSamples = builder.withSamples;
     }
@@ -60,8 +54,6 @@ public class RequestConfig {
      * Builder class for {@link RequestConfig} instances.
      */
     public static class Builder {
-        private Instant startTime = null;
-        private Instant endTime = null;
         private boolean toWebhook = true;
         private Samples withSamples = Samples.ACCOUNT_DEFAULT;
 
@@ -74,30 +66,6 @@ public class RequestConfig {
          */
         public RequestConfig build() {
             return new RequestConfig(this);
-        }
-
-        /**
-         * Set the start time to be used for API requests made using this configuration. This
-         * <b>must</b> be set for all requests that allow configuration to be passed, other than
-         * {@link co.tryterra.terraclient.api.TerraClientV2#getAthleteForUser(User, RequestConfig)}.
-         *
-         * @param value {@link Instant} to set the {@code start_date} parameter to
-         * @return this builder object for method chaining
-         */
-        public Builder startTime(Instant value) {
-            this.startTime = value;
-            return this;
-        }
-
-        /**
-         * Set the end time to be used for API requests made using this configuration.
-         *
-         * @param value {@link Instant} to set the {@code end_date} parameter to
-         * @return this builder object for method chaining
-         */
-        public Builder endTime(Instant value) {
-            this.endTime = value;
-            return this;
         }
 
         /**
@@ -121,6 +89,7 @@ public class RequestConfig {
          * @return this builder object for method chaining
          */
         public Builder withSamples(Samples value) {
+            Objects.requireNonNull(value, "Value must be an item from the Samples enum");
             this.withSamples = value;
             return this;
         }
@@ -128,26 +97,6 @@ public class RequestConfig {
 
     public static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The unix timestamp that will be sent as the start time for the API request. This
-     * will be used in the {@code start_date} query parameter.
-     *
-     * @return value for the {@code start_date} query parameter
-     */
-    public Instant getStartTime() {
-        return startTime;
-    }
-
-    /**
-     * The unix timestamp that will be sent as the end time for the API request. This
-     * will be used in the {@code end_date} query parameter.
-     *
-     * @return value for the {@code end_date} query parameter
-     */
-    public Instant getEndTime() {
-        return endTime;
     }
 
     /**

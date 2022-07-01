@@ -34,6 +34,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
+import java.time.Instant;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -72,17 +74,15 @@ public class RestClientV2 {
                 .addHeader("dev-id", devId);
     }
 
-    private void addQueryParametersToBuilder(HttpUrl.Builder builder, RequestConfig requestConfig) {
-        if (requestConfig.getStartTime() == null) {
-            throw new RuntimeException("startTime cannot be null for this request");
-        }
+    private void addQueryParametersToBuilder(HttpUrl.Builder builder, RequestConfig requestConfig, Instant startTime, Instant endTime) {
+        Objects.requireNonNull(startTime, "startTime cannot be null for this request");
 
         builder
-                .addQueryParameter("start_date", String.valueOf(requestConfig.getStartTime().getEpochSecond()))
+                .addQueryParameter("start_date", String.valueOf(startTime.getEpochSecond()))
                 .addQueryParameter("to_webhook", requestConfig.isToWebhook() ? "true" : "false");
 
-        if (requestConfig.getEndTime() != null) {
-            builder.addQueryParameter("end_date", String.valueOf(requestConfig.getEndTime().getEpochSecond()));
+        if (endTime != null) {
+            builder.addQueryParameter("end_date", String.valueOf(endTime.getEpochSecond()));
         }
         if (!requestConfig.getWithSamples().equals(RequestConfig.Samples.ACCOUNT_DEFAULT)) {
             builder.addQueryParameter(
@@ -124,55 +124,55 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "athlete", Athlete.class);
     }
 
-    Future<TerraApiResponse<Activity>> getActivityForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/activity").newBuilder()
                 .addQueryParameter("user_id", user.getId());
-        addQueryParametersToBuilder(url, requestConfig);
+        addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
 
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url.build()).build();
         return performAsyncCall(request, user, "data", Activity.class);
     }
 
-    Future<TerraApiResponse<Body>> getBodyForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/body").newBuilder()
                 .addQueryParameter("user_id", user.getId());
-        addQueryParametersToBuilder(url, requestConfig);
+        addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
 
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url.build()).build();
         return performAsyncCall(request, user, "data", Body.class);
     }
 
-    Future<TerraApiResponse<Daily>> getDailyForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/daily").newBuilder()
                 .addQueryParameter("user_id", user.getId());
-        addQueryParametersToBuilder(url, requestConfig);
+        addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
 
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url.build()).build();
         return performAsyncCall(request, user, "data", Daily.class);
     }
 
-    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/menstruation").newBuilder()
                 .addQueryParameter("user_id", user.getId());
-        addQueryParametersToBuilder(url, requestConfig);
+        addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
 
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url.build()).build();
         return performAsyncCall(request, user, "data", Menstruation.class);
     }
 
-    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/nutrition").newBuilder()
                 .addQueryParameter("user_id", user.getId());
-        addQueryParametersToBuilder(url, requestConfig);
+        addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
 
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url.build()).build();
         return performAsyncCall(request, user, "data", Nutrition.class);
     }
 
-    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/sleep").newBuilder()
                 .addQueryParameter("user_id", user.getId());
-        addQueryParametersToBuilder(url, requestConfig);
+        addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
 
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url.build()).build();
         return performAsyncCall(request, user, "data", Sleep.class);

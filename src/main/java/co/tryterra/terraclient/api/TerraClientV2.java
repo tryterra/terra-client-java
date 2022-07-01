@@ -25,6 +25,7 @@ import co.tryterra.terraclient.models.v2.menstruation.Menstruation;
 import co.tryterra.terraclient.models.v2.nutrition.Nutrition;
 import co.tryterra.terraclient.models.v2.sleep.Sleep;
 
+import java.time.Instant;
 import java.util.concurrent.Future;
 
 /**
@@ -83,112 +84,136 @@ public interface TerraClientV2 {
      * for the given user.
      *
      * @param user the user to fetch the activity data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Activity>> getActivityForUser(User user);
+    Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /activity} endpoint to fetch the activity data
      * for the given user.
      *
      * @param user the user to fetch the activity data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Activity>> getActivityForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /body} endpoint to fetch the body data
      * for the given user.
      *
      * @param user the user to fetch the body data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Body>> getBodyForUser(User user);
+    Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /body} endpoint to fetch the body data
      * for the given user.
      *
      * @param user the user to fetch the body data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Body>> getBodyForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /daily} endpoint to fetch the daily data
      * for the given user.
      *
      * @param user the user to fetch the daily data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Daily>> getDailyForUser(User user);
+    Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /daily} endpoint to fetch the daily data
      * for the given user.
      *
      * @param user the user to fetch the daily data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Daily>> getDailyForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /menstruation} endpoint to fetch the menstruation data
      * for the given user.
      *
      * @param user the user to fetch the menstruation data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user);
+    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /menstruation} endpoint to fetch the menstruation data
      * for the given user.
      *
      * @param user the user to fetch the menstruation data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /nutrition} endpoint to fetch the nutrition data
      * for the given user.
      *
      * @param user the user to fetch the nutrition data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user);
+    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /nutrition} endpoint to fetch the nutrition data
      * for the given user.
      *
      * @param user the user to fetch the nutrition data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /sleep} endpoint to fetch the sleep data
      * for the given user.
      *
      * @param user the user to fetch the sleep data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Sleep>> getSleepForUser(User user);
+    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /sleep} endpoint to fetch the sleep data
      * for the given user.
      *
      * @param user the user to fetch the sleep data for
+     * @param startTime the start time to fetch data since
+     * @param endTime then end time to fetch data before
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 }

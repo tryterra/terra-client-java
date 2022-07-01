@@ -44,7 +44,7 @@ public class TerraClientFactory {
      *
      * @param xApiKey your Terra API key
      * @param devId your Terra developer ID
-     * @param requestConfig the per-request configuration to use
+     * @param requestConfig the default per-request configuration to use
      * @return the created instance
      */
     public static TerraClientV2 getClientV2(String xApiKey, String devId, RequestConfig requestConfig) {
@@ -71,7 +71,7 @@ public class TerraClientFactory {
      * @param xApiKey your Terra API key
      * @param devId your Terra developer ID
      * @param apiUrl the API base url to make requests to
-     * @param requestConfig the per-request configuration to use
+     * @param requestConfig the default per-request configuration to use
      * @return the created instance
      */
     public static TerraClientV2 getClientV2(String xApiKey, String devId, String apiUrl, RequestConfig requestConfig) {

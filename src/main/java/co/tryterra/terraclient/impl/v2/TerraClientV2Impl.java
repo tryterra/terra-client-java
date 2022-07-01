@@ -28,6 +28,7 @@ import co.tryterra.terraclient.models.v2.menstruation.Menstruation;
 import co.tryterra.terraclient.models.v2.nutrition.Nutrition;
 import co.tryterra.terraclient.models.v2.sleep.Sleep;
 
+import java.time.Instant;
 import java.util.concurrent.Future;
 
 public class TerraClientV2Impl implements TerraClientV2 {
@@ -65,62 +66,62 @@ public class TerraClientV2Impl implements TerraClientV2 {
     }
 
     @Override
-    public Future<TerraApiResponse<Activity>> getActivityForUser(User user) {
-        return this.getActivityForUser(user, this.defaultRequestConfig);
+    public Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime) {
+        return this.getActivityForUser(user, startTime, endTime, this.defaultRequestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Activity>> getActivityForUser(User user, RequestConfig requestConfig) {
-        return restClient.getActivityForUser(user, requestConfig);
+    public Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+        return restClient.getActivityForUser(user, startTime, endTime, requestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Body>> getBodyForUser(User user) {
-        return this.getBodyForUser(user, this.defaultRequestConfig);
+    public Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime) {
+        return this.getBodyForUser(user, startTime, endTime, this.defaultRequestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Body>> getBodyForUser(User user, RequestConfig requestConfig) {
-        return restClient.getBodyForUser(user, requestConfig);
+    public Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+        return restClient.getBodyForUser(user, startTime, endTime, requestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Daily>> getDailyForUser(User user) {
-        return this.getDailyForUser(user, this.defaultRequestConfig);
+    public Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime) {
+        return this.getDailyForUser(user, startTime, endTime, this.defaultRequestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Daily>> getDailyForUser(User user, RequestConfig requestConfig) {
-        return restClient.getDailyForUser(user, requestConfig);
+    public Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+        return restClient.getDailyForUser(user, startTime, endTime, requestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user) {
-        return this.getMenstruationForUser(user, this.defaultRequestConfig);
+    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime) {
+        return this.getMenstruationForUser(user, startTime, endTime, this.defaultRequestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, RequestConfig requestConfig) {
-        return restClient.getMenstruationForUser(user, requestConfig);
+    public Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+        return restClient.getMenstruationForUser(user, startTime, endTime, requestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user) {
-        return this.getNutritionForUser(user, this.defaultRequestConfig);
+    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime) {
+        return this.getNutritionForUser(user, startTime, endTime, this.defaultRequestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, RequestConfig requestConfig) {
-        return restClient.getNutritionForUser(user, requestConfig);
+    public Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+        return restClient.getNutritionForUser(user, startTime, endTime, requestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Sleep>> getSleepForUser(User user) {
-        return this.getSleepForUser(user, this.defaultRequestConfig);
+    public Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime) {
+        return this.getSleepForUser(user, startTime, endTime, this.defaultRequestConfig);
     }
 
     @Override
-    public Future<TerraApiResponse<Sleep>> getSleepForUser(User user, RequestConfig requestConfig) {
-        return restClient.getSleepForUser(user, requestConfig);
+    public Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+        return restClient.getSleepForUser(user, startTime, endTime, requestConfig);
     }
 }
