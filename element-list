@@ -1,0 +1,14 @@
+module:co.tryterra.terraclient
+co.tryterra.terraclient
+co.tryterra.terraclient.api
+co.tryterra.terraclient.api.annotations
+co.tryterra.terraclient.exceptions
+co.tryterra.terraclient.models
+co.tryterra.terraclient.models.v2.activity
+co.tryterra.terraclient.models.v2.body
+co.tryterra.terraclient.models.v2.common
+co.tryterra.terraclient.models.v2.daily
+co.tryterra.terraclient.models.v2.menstruation
+co.tryterra.terraclient.models.v2.nutrition
+co.tryterra.terraclient.models.v2.samples
+co.tryterra.terraclient.models.v2.sleep
