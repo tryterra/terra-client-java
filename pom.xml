@@ -21,7 +21,7 @@
 
     <groupId>co.tryterra</groupId>
     <artifactId>terra-client</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <organization>
         <name>Terra Enabling Developers</name>
@@ -54,8 +54,20 @@
         <connection>scm:git:git@github.com:tryterra/terra-client-java.git</connection>
         <developerConnection>scm:git:git@github.com:tryterra/terra-client-java.git</developerConnection>
         <url>https://github.com/tryterra/terra-client-java/tree/master</url>
-      <tag>terra-client-0.0.1</tag>
-  </scm>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <!-- Compiler versions -->
