@@ -16,7 +16,6 @@
 
 module co.tryterra.terraclient {
     requires static lombok;
-    requires static annotations;
 
     requires okhttp3;
     requires com.fasterxml.jackson.databind;
