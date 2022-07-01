@@ -1,3 +1,6 @@
+[![test](https://github.com/tryterra/terra-client-java/actions/workflows/test.yml/badge.svg)](https://github.com/tryterra/terra-client-java/actions/workflows/test.yml)
+[![docs](https://github.com/tryterra/terra-client-java/actions/workflows/docs.yml/badge.svg)](https://github.com/tryterra/terra-client-java/actions/workflows/docs.yml)
+
 # Terra Java Client Library
 
 The official [Terra](https://tryterra.co) Java client library.
