@@ -16,7 +16,6 @@
 
 package co.tryterra.terraclient.impl;
 
-import co.tryterra.terraclient.api.PartialUser;
 import co.tryterra.terraclient.api.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,12 +30,6 @@ public class UserImpl implements User {
     private final String id;
     private final String provider;
     private final OffsetDateTime lastWebhookUpdate;
-
-    public UserImpl(String id) {
-        this.id = id;
-        this.provider = null;
-        this.lastWebhookUpdate = null;
-    }
 
     @JsonCreator
     public UserImpl(

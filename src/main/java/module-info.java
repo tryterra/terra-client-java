@@ -36,6 +36,7 @@ module co.tryterra.terraclient {
     exports co.tryterra.terraclient.models.v2.sleep;
 
     // Allow jackson to deserialize to our models using reflection
+    opens co.tryterra.terraclient.impl to com.fasterxml.jackson.databind;
     opens co.tryterra.terraclient.models to com.fasterxml.jackson.databind;
     opens co.tryterra.terraclient.models.v2.activity to com.fasterxml.jackson.databind;
     opens co.tryterra.terraclient.models.v2.body to com.fasterxml.jackson.databind;
