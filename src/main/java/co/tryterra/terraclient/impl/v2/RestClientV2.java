@@ -17,6 +17,7 @@
 package co.tryterra.terraclient.impl.v2;
 
 import co.tryterra.terraclient.RequestConfig;
+import co.tryterra.terraclient.api.PartialUser;
 import co.tryterra.terraclient.api.TerraApiResponse;
 import co.tryterra.terraclient.api.User;
 import co.tryterra.terraclient.impl.OkHttp3AsyncCall;
@@ -92,7 +93,7 @@ public class RestClientV2 {
         }
     }
 
-    private <T> CompletableFuture<TerraApiResponse<T>> performAsyncCall(Request request, User user, String key, Class<T> parseTo) {
+    private <T> CompletableFuture<TerraApiResponse<T>> performAsyncCall(Request request, PartialUser user, String key, Class<T> parseTo) {
         return new OkHttp3AsyncCall(httpClient.newCall(request))
                 .asCompletionStage()
                 .thenApplyAsync(response -> new ResponseBodyParser<>(user, key, parseTo, this)
@@ -115,7 +116,7 @@ public class RestClientV2 {
         return performAsyncCall(request, null, "user", UserImpl.class);
     }
 
-    Future<TerraApiResponse<Athlete>> getAthleteForUser(User user, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Athlete>> getAthleteForUser(PartialUser user, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/athlete").newBuilder()
                 .addQueryParameter("user_id", user.getId())
                 .addQueryParameter("to_webhook", requestConfig.isToWebhook() ? "true" : "false")
@@ -124,7 +125,7 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "athlete", Athlete.class);
     }
 
-    Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Activity>> getActivityForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/activity").newBuilder()
                 .addQueryParameter("user_id", user.getId());
         addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
@@ -133,7 +134,7 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "data", Activity.class);
     }
 
-    Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Body>> getBodyForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/body").newBuilder()
                 .addQueryParameter("user_id", user.getId());
         addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
@@ -142,7 +143,7 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "data", Body.class);
     }
 
-    Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Daily>> getDailyForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/daily").newBuilder()
                 .addQueryParameter("user_id", user.getId());
         addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
@@ -151,7 +152,7 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "data", Daily.class);
     }
 
-    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/menstruation").newBuilder()
                 .addQueryParameter("user_id", user.getId());
         addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
@@ -160,7 +161,7 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "data", Menstruation.class);
     }
 
-    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Nutrition>> getNutritionForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/nutrition").newBuilder()
                 .addQueryParameter("user_id", user.getId());
         addQueryParametersToBuilder(url, requestConfig, startTime, endTime);
@@ -169,7 +170,7 @@ public class RestClientV2 {
         return performAsyncCall(request, user, "data", Nutrition.class);
     }
 
-    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
+    Future<TerraApiResponse<Sleep>> getSleepForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/sleep").newBuilder()
                 .addQueryParameter("user_id", user.getId());
         addQueryParametersToBuilder(url, requestConfig, startTime, endTime);

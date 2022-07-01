@@ -16,6 +16,7 @@
 
 package co.tryterra.terraclient.impl;
 
+import co.tryterra.terraclient.api.PartialUser;
 import co.tryterra.terraclient.api.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

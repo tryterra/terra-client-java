@@ -114,6 +114,9 @@ public class RequestConfig {
      * The value that will be sent to indicate whether the API should send the data
      * directly to the developer's webhook URL. This will be used in the {@code to_webhook}
      * query parameter.
+     * <br>
+     * Note that if this is set, the future returned by API request methods will <b>never</b>
+     * contain any parsed data objects.
      *
      * @return value for the {@code to_webhook} query parameter
      */

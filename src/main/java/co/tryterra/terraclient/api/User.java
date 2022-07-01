@@ -19,17 +19,9 @@ package co.tryterra.terraclient.api;
 import java.time.OffsetDateTime;
 
 /**
- * Interface representing a Terra user.
+ * Interface representing a full Terra user.
  */
-public interface User {
-    /**
-     * The user's ID. This is sent as a query parameter to all API requests for
-     * this user's data. It will always be formatted as a UUIDv4.
-     *
-     * @return the user's ID
-     */
-    String getId();
-
+public interface User extends PartialUser{
     /**
      * The provider that this user is registered with. Note that this will always be {@code null}
      * until the first request for any data for this user is made.

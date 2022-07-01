@@ -33,6 +33,18 @@ import java.util.concurrent.Future;
  */
 public interface TerraClientV2 {
     /**
+     * Create a new temporary {@link PartialUser} object, without making an API call, that
+     * can be passed in to the {@code user} parameter of the data request methods of this class.
+     * <br>
+     * This allows you to fetch data without having to make an extra unnecessary API request to
+     * the {@code /userInfo} endpoint.
+     *
+     * @param userId the ID of the user to be created
+     * @return the created {@link PartialUser} object
+     */
+    PartialUser userFromId(String userId);
+
+    /**
      * Makes a request to the {@code /subscriptions} endpoint to fetch all users
      * registered with your developer ID.
      *
@@ -44,7 +56,7 @@ public interface TerraClientV2 {
      * Makes a request to the {@code /userInfo} endpoint to fetch the details
      * for the user with the given ID. This {@link User} object can then subsequently
      * be used to fetch data through the other available methods.
-     *
+     * <br>
      * Note that the fetched user will both be available through {@link TerraApiResponse#getUser()},
      * and will also be the single item in the {@link TerraApiResponse#getParsedData()} list.
      *
@@ -54,22 +66,34 @@ public interface TerraClientV2 {
     Future<? extends TerraApiResponse<? extends User>> getUser(String userId);
 
     /**
+     * Makes a request to the {@code /userInfo} endpoint to fetch the details
+     * for the user represented by the given {@link PartialUser}.
+     * <br>
+     * Note that the fetched user will both be available through {@link TerraApiResponse#getUser()},
+     * and will also be the single item in the {@link TerraApiResponse#getParsedData()} list.
+     *
+     * @param user the {@link PartialUser} to get information for
+     * @return future that will contain the fetched {@link User} object upon completion
+     */
+    Future<? extends TerraApiResponse<? extends User>> getUser(PartialUser user);
+
+    /**
      * Asynchronously makes a request to the {@code /athlete} endpoint to fetch the athlete data
      * for the given user.
-     *
+     * <br>
      * Note that if athlete data is available for the given user, it will be available as the single item
      * in the list returned by {@link TerraApiResponse#getParsedData()}.
      *
      * @param user the user to fetch the athlete data for
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Athlete>> getAthleteForUser(User user);
+    Future<TerraApiResponse<Athlete>> getAthleteForUser(PartialUser user);
 
     /**
      * Asynchronously makes a request to the {@code /athlete} endpoint to fetch the athlete data
      * for the given user. Note that only the {@code toWebhook} configuration property of
      * {@link co.tryterra.terraclient.RequestConfig} will be considered in this case.
-     *
+     * <br>
      * Note that if athlete data is available for the given user, it will be available as the single item
      * in the list returned by {@link TerraApiResponse#getParsedData()}.
      *
@@ -77,7 +101,7 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Athlete>> getAthleteForUser(User user, RequestConfig requestConfig);
+    Future<TerraApiResponse<Athlete>> getAthleteForUser(PartialUser user, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /activity} endpoint to fetch the activity data
@@ -88,7 +112,7 @@ public interface TerraClientV2 {
      * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime);
+    Future<TerraApiResponse<Activity>> getActivityForUser(PartialUser user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /activity} endpoint to fetch the activity data
@@ -100,7 +124,7 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Activity>> getActivityForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
+    Future<TerraApiResponse<Activity>> getActivityForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /body} endpoint to fetch the body data
@@ -111,7 +135,7 @@ public interface TerraClientV2 {
      * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime);
+    Future<TerraApiResponse<Body>> getBodyForUser(PartialUser user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /body} endpoint to fetch the body data
@@ -123,7 +147,7 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Body>> getBodyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
+    Future<TerraApiResponse<Body>> getBodyForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /daily} endpoint to fetch the daily data
@@ -134,7 +158,7 @@ public interface TerraClientV2 {
      * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime);
+    Future<TerraApiResponse<Daily>> getDailyForUser(PartialUser user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /daily} endpoint to fetch the daily data
@@ -146,7 +170,7 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Daily>> getDailyForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
+    Future<TerraApiResponse<Daily>> getDailyForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /menstruation} endpoint to fetch the menstruation data
@@ -157,7 +181,7 @@ public interface TerraClientV2 {
      * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime);
+    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(PartialUser user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /menstruation} endpoint to fetch the menstruation data
@@ -169,7 +193,7 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
+    Future<TerraApiResponse<Menstruation>> getMenstruationForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /nutrition} endpoint to fetch the nutrition data
@@ -180,7 +204,7 @@ public interface TerraClientV2 {
      * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime);
+    Future<TerraApiResponse<Nutrition>> getNutritionForUser(PartialUser user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /nutrition} endpoint to fetch the nutrition data
@@ -192,7 +216,7 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Nutrition>> getNutritionForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
+    Future<TerraApiResponse<Nutrition>> getNutritionForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 
     /**
      * Asynchronously makes a request to the {@code /sleep} endpoint to fetch the sleep data
@@ -203,7 +227,7 @@ public interface TerraClientV2 {
      * @param endTime then end time to fetch data before
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime);
+    Future<TerraApiResponse<Sleep>> getSleepForUser(PartialUser user, Instant startTime, Instant endTime);
 
     /**
      * Asynchronously makes a request to the {@code /sleep} endpoint to fetch the sleep data
@@ -215,5 +239,5 @@ public interface TerraClientV2 {
      * @param requestConfig the config to use for this request
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<Sleep>> getSleepForUser(User user, Instant startTime, Instant endTime, RequestConfig requestConfig);
+    Future<TerraApiResponse<Sleep>> getSleepForUser(PartialUser user, Instant startTime, Instant endTime, RequestConfig requestConfig);
 }

@@ -16,6 +16,7 @@
 
 package co.tryterra.terraclient.impl;
 
+import co.tryterra.terraclient.api.PartialUser;
 import co.tryterra.terraclient.api.TerraApiResponse;
 import co.tryterra.terraclient.exceptions.TerraRuntimeException;
 import co.tryterra.terraclient.impl.v2.RestClientV2;
@@ -38,12 +39,12 @@ import java.util.stream.StreamSupport;
 public class ResponseBodyParser<T> {
     private static  final Logger logger = LoggerFactory.getLogger(ResponseBodyParser.class);
 
-    private final User user;
+    private final PartialUser user;
     private final String key;
     private final Class<T> parseTo;
     private final RestClientV2 restClient;
 
-    public ResponseBodyParser(User user, String key, Class<T> parseTo, RestClientV2 restClient) {
+    public ResponseBodyParser(PartialUser user, String key, Class<T> parseTo, RestClientV2 restClient) {
         this.user = user;
         this.key = key;
         this.parseTo = parseTo;
@@ -117,7 +118,7 @@ public class ResponseBodyParser<T> {
     public TerraApiResponse<T> toTerraApiResponse(Response response) {
         try {
             var parsed = parseResponse(response);
-            return new TerraApiResponseImpl<>(response, parsed.getParsedBody(), parsed.getRawBody(), user);
+            return new TerraApiResponseImpl<>(response, parsed.getParsedBody(), parsed.getRawBody(), parsed.getUser());
         } catch (ResponseParsingException e) {
             throw new TerraRuntimeException(e);
         }
