@@ -21,7 +21,7 @@
 
     <groupId>co.tryterra</groupId>
     <artifactId>terra-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <organization>
         <name>Terra Enabling Developers</name>
@@ -54,7 +54,7 @@
         <connection>scm:git:git@github.com:tryterra/terra-client-java.git</connection>
         <developerConnection>scm:git:git@github.com:tryterra/terra-client-java.git</developerConnection>
         <url>https://github.com/tryterra/terra-client-java/tree/master</url>
-      <tag>terra-client-0.0.1</tag>
+      <tag>v0.0.1</tag>
   </scm>
 
     <properties>
