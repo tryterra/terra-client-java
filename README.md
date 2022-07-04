@@ -1,7 +1,7 @@
 [![GitHub license](https://img.shields.io/github/license/tryterra/terra-client-java)](https://github.com/tryterra/terra-client-java/blob/master/LICENSE)
 [![test](https://github.com/tryterra/terra-client-java/actions/workflows/test.yml/badge.svg)](https://github.com/tryterra/terra-client-java/actions/workflows/test.yml)
 [![docs](https://github.com/tryterra/terra-client-java/actions/workflows/docs.yml/badge.svg)](https://github.com/tryterra/terra-client-java/actions/workflows/docs.yml)
-![Maven Central](https://img.shields.io/maven-central/v/co.tryterra/terraclient)
+![Maven Central](https://img.shields.io/maven-central/v/co.tryterra/terra-client)
 
 # Terra Java Client Library
 
