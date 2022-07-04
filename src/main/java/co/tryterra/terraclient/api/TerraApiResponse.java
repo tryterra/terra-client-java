@@ -62,6 +62,7 @@ public interface TerraApiResponse<T> {
      *
      * @return the message sent with the response payload
      */
+    @Nullable
     String getMessage();
 
     /**

@@ -116,6 +116,14 @@ public class RestClientV2 {
         return performAsyncCall(request, null, "user", UserImpl.class);
     }
 
+    Future<TerraApiResponse<Void>> deauthenticateUser(PartialUser user) {
+        var url = HttpUrl.parse(baseUrl + "/auth/deauthenticateUser").newBuilder()
+                .addQueryParameter("user_id", user.getId())
+                .build();
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).build();
+        return performAsyncCall(request, null, null, Void.class);
+    }
+
     Future<TerraApiResponse<Athlete>> getAthleteForUser(PartialUser user, RequestConfig requestConfig) {
         var url = HttpUrl.parse(baseUrl + "/athlete").newBuilder()
                 .addQueryParameter("user_id", user.getId())

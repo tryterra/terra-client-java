@@ -70,6 +70,11 @@ public class TerraClientV2Impl implements TerraClientV2 {
     }
 
     @Override
+    public Future<TerraApiResponse<Void>> deauthenticateUser(PartialUser user) {
+        return restClient.deauthenticateUser(user);
+    }
+
+    @Override
     public Future<TerraApiResponse<Athlete>> getAthleteForUser(PartialUser user) {
         return this.getAthleteForUser(user, this.defaultRequestConfig);
     }

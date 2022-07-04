@@ -79,7 +79,7 @@ public class ResponseBodyParser<T> {
             throw new ResponseParsingException(ex);
         }
 
-        if (!response.isSuccessful()) {
+        if (!response.isSuccessful() || parseTo.equals(Void.class)) {
             return new ParsedResponse<>(rawBody, null, null);
         }
 

@@ -67,7 +67,7 @@ public interface TerraClientV2 {
     Future<? extends TerraApiResponse<? extends User>> getUser(String userId);
 
     /**
-     * Makes a request to the {@code /userInfo} endpoint to fetch the details
+     * Asynchronously makes a request to the {@code /userInfo} endpoint to fetch the details
      * for the user represented by the given {@link PartialUser}.
      * <br>
      * Note that the fetched user will both be available through {@link TerraApiResponse#getUser()},
@@ -77,6 +77,18 @@ public interface TerraClientV2 {
      * @return future that will contain the fetched {@link User} object upon completion
      */
     Future<? extends TerraApiResponse<? extends User>> getUser(PartialUser user);
+
+    /**
+     * Asynchronously makes a request to the {@code /auth/deauthenticateUser} endpoint to
+     * deauthenticate the given user with Terra, terminating the connection.
+     * <br>
+     * If successful, the response will have a 200 status code. Note that no data
+     * will be returned with the API response.
+     *
+     * @param user the user to deauthenticate
+     * @return future that will contain the API response upon completion
+     */
+    Future<TerraApiResponse<Void>> deauthenticateUser(PartialUser user);
 
     /**
      * Asynchronously makes a request to the {@code /athlete} endpoint to fetch the athlete data
