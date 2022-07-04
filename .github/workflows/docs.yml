@@ -18,11 +18,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docs with Maven
-        run: ./mvnw -B clean package site
+        run: ./mvnw -B clean package javadoc:javadoc
 
       - name: Copy to Documentation Website Location
         run: |
-          cp -rf target/site/. gh-pages
+          cp -rf target/site/apidocs/. gh-pages
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
