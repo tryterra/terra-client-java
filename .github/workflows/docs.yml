@@ -3,7 +3,6 @@ name: docs
 on:
   push:
     branches: [ master ]
-    paths: [ '**.java' ]
 
 jobs:
   javadoc:
@@ -19,19 +18,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docs with Maven
-        run: ./mvnw -B clean package javadoc:javadoc
+        run: ./mvnw -B clean package site
 
       - name: Copy to Documentation Website Location
         run: |
-          cp -rf target/site/apidocs/. gh-pages
-
-      - name: Tidy up the javadocs
-        id: tidy
-        uses: cicirello/javadoc-cleanup@v1
-
-      - name: Log javadoc-cleanup output
-        run: |
-          echo "modified-count = ${{ steps.tidy.outputs.modified-count }}"
+          cp -rf target/site/. gh-pages
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
