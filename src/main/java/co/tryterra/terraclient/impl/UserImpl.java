@@ -40,7 +40,7 @@ public class UserImpl implements User {
         this.provider = provider == null ? user.get("provider").asText() : provider;
 
         String lastWhUpdate = lastWebhookUpdate;
-        if (lastWhUpdate == null && !user.get("last_webhook_update").isNull()) {
+        if (lastWhUpdate == null && user != null && !user.get("last_webhook_update").isNull()) {
             lastWhUpdate = user.get("last_webhook_update").asText();
         }
         this.lastWebhookUpdate = lastWhUpdate == null ? null : OffsetDateTime.parse(lastWhUpdate, dateTimeFormatter);

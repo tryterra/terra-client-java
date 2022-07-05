@@ -29,6 +29,10 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 /**
@@ -39,6 +43,8 @@ public class WebhookHandlerUtility {
     private static final Logger logger = LoggerFactory.getLogger(WebhookHandlerUtility.class);
     private static final byte[] HEX_ARRAY = "0123456789ABCDEF".getBytes(StandardCharsets.US_ASCII);
 
+    private final ExecutorService executorService;
+    private final HashMap<String, Consumer<TerraWebhookPayload>> payloadHandlers;
     private final ObjectMapper objectMapper;
     private final String secret;
 
@@ -48,8 +54,10 @@ public class WebhookHandlerUtility {
      * @param secret the value of your webhook signing secret - found on the developer dashboard
      */
     public WebhookHandlerUtility(String secret) {
-        this.secret = secret;
+        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 4);
+        this.payloadHandlers = new HashMap<>();
         this.objectMapper = new ObjectMapper();
+        this.secret = secret;
     }
 
     private static String bytesToHex(byte[] bytes) {
@@ -106,7 +114,7 @@ public class WebhookHandlerUtility {
     }
 
     /**
-     * Parse the raw payload sent with a webhook request into a {@link TerraWebhookPayload}.
+     * Parses the raw payload sent with a webhook request into a {@link TerraWebhookPayload}.
      *
      * @param rawPayload the raw payload to parse
      * @return the created {@link TerraWebhookPayload}, or {@code null} if the payload was malformed
@@ -120,5 +128,58 @@ public class WebhookHandlerUtility {
             logger.debug("Payload could not be parsed to JsonNode", ex);
             return null;
         }
+    }
+
+    /**
+     * Parses the raw payload sent with a webhook request into a {@link TerraWebhookPayload} and
+     * then dispatches it to the correct handler method for its event type. If no handler exists
+     * for the event type then it will be dispatched to the default handler, or discarded if no
+     * default handler exists.
+     *
+     * @see #addEventHandler(String, Consumer)
+     * @see #addDefaultEventHandler(Consumer)
+     *
+     * @param rawPayload the raw string payload to parse and dispatch to a handler
+     */
+    public void parseAndDispatchWebhookPayload(String rawPayload) {
+        var parsedPayload = parseWebhookPayload(rawPayload);
+        if (parsedPayload == null) {
+            return;
+        }
+
+        var handler = payloadHandlers.containsKey(parsedPayload.getType())
+                ? payloadHandlers.get(parsedPayload.getType()) : payloadHandlers.get("default");
+        if (handler == null) {
+            logger.debug("No handler found for event type {}", parsedPayload.getType());
+            return;
+        }
+
+        executorService.submit(() -> handler.accept(parsedPayload));
+    }
+
+    /**
+     * Registers a handler method for the given event type. This will be called with an instance
+     * of {@link TerraWebhookPayload} when an event of that type is received
+     * by {@link #parseAndDispatchWebhookPayload(String)}.
+     *
+     * @param eventName the event to register the handler method for
+     * @param consumer the handler method to call when the event is received
+     * @return this instance, for method chaining
+     */
+    public WebhookHandlerUtility addEventHandler(String eventName, Consumer<TerraWebhookPayload> consumer) {
+        payloadHandlers.put(eventName, consumer);
+        return this;
+    }
+
+    /**
+     * Registers a handler method that will be called if no other handler method can be
+     * resolved for a received event type.
+     *
+     * @param consumer the handler method to call with previously unhandled events
+     * @return this instance, for method chaining
+     */
+    public WebhookHandlerUtility addDefaultEventHandler(Consumer<TerraWebhookPayload> consumer) {
+        payloadHandlers.put("default", consumer);
+        return this;
     }
 }

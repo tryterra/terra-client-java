@@ -45,21 +45,29 @@ import java.util.concurrent.Future;
 public class RestClientV2 {
     private static final String DEFAULT_API_URL = "https://api.tryterra.co/v2";
 
-    private final OkHttpClient httpClient = new OkHttpClient();
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final ExecutorService executorService = Executors.newFixedThreadPool(30);
+    private final OkHttpClient httpClient;
+    private final ObjectMapper objectMapper;
+    private final ExecutorService executorService;
 
     private final String xApiKey;
     private final String devId;
     private final String baseUrl;
 
     public RestClientV2(String xApiKey, String devId) {
+        this.httpClient = new OkHttpClient();
+        this.objectMapper = new ObjectMapper();
+        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 4);
+
         this.xApiKey = xApiKey;
         this.devId = devId;
         this.baseUrl = DEFAULT_API_URL;
     }
 
     public RestClientV2(String xApiKey, String devId, String apiUrl) {
+        this.httpClient = new OkHttpClient();
+        this.objectMapper = new ObjectMapper();
+        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 4);
+
         this.xApiKey = xApiKey;
         this.devId = devId;
         this.baseUrl = apiUrl.endsWith("/") ? apiUrl.substring(0, apiUrl.length() - 1) : apiUrl;

@@ -19,6 +19,7 @@ package co.tryterra.terraclient.impl;
 import co.tryterra.terraclient.api.TerraWebhookPayload;
 import co.tryterra.terraclient.api.User;
 import co.tryterra.terraclient.models.Athlete;
+import co.tryterra.terraclient.models.ReauthData;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
@@ -85,6 +86,17 @@ public class TerraWebhookPayloadImpl implements TerraWebhookPayload {
             return Optional.empty();
         }
         return Optional.ofNullable(jsonNodeToObject(rawBody.get("user"), UserImpl.class));
+    }
+
+    @Override
+    public Optional<ReauthData> asReauthData() {
+        if (!getType().equals("user_reauth")) {
+            return Optional.empty();
+        }
+        return Optional.of(new ReauthData(
+                jsonNodeToObject(rawBody.get("old_user"), UserImpl.class),
+                jsonNodeToObject(rawBody.get("new_user"), UserImpl.class)
+        ));
     }
 
     @Override
