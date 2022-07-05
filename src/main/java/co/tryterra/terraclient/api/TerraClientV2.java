@@ -42,6 +42,7 @@ public interface TerraClientV2 {
      *
      * @param userId the ID of the user to be created
      * @return the created {@link PartialUser} object
+     * @throws NullPointerException if the userId passed is null
      */
     PartialUser userFromId(String userId);
 

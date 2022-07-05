@@ -16,6 +16,9 @@
 
 package co.tryterra.terraclient.exceptions;
 
+/**
+ * Base class for all RuntimeExceptions thrown by this library.
+ */
 public class TerraRuntimeException extends RuntimeException {
     public TerraRuntimeException(String text) {
         super(text);

@@ -21,7 +21,7 @@ import co.tryterra.terraclient.api.TerraApiResponse;
 import co.tryterra.terraclient.exceptions.TerraRuntimeException;
 import co.tryterra.terraclient.impl.v2.RestClientV2;
 import co.tryterra.terraclient.api.User;
-import co.tryterra.terraclient.exceptions.ResponseParsingException;
+import co.tryterra.terraclient.exceptions.BodyParsingException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
@@ -62,21 +62,21 @@ public class ResponseBodyParser<T> {
         try {
             return restClient.getObjectMapper().treeToValue(node, parseTo);
         } catch (JsonProcessingException ex) {
-            logger.debug("Could not parse node to {}", parseTo);
+            logger.debug("Could not parse node to object successfully", ex);
             return null;
         }
     }
 
-    private ParsedResponse<T> parseResponse(Response response) throws ResponseParsingException {
+    private ParsedResponse<T> parseResponse(Response response) throws BodyParsingException {
         if (response.body() == null) {
-            throw new ResponseParsingException("No body returned in response");
+            throw new BodyParsingException("No body returned in response");
         }
 
         JsonNode rawBody;
         try (response) {
             rawBody = restClient.getObjectMapper().readTree(response.body().string());
         } catch (IOException ex) {
-            throw new ResponseParsingException(ex);
+            throw new BodyParsingException(ex);
         }
 
         if (!response.isSuccessful() || parseTo.equals(Void.class)) {
@@ -93,6 +93,7 @@ public class ResponseBodyParser<T> {
         }
 
         if (!rawBody.get(key).isArray()) {
+            logger.debug("Inner key is not an array, attempting to parse it into a single object");
             try {
                 return new ParsedResponse<>(
                         rawBody,
@@ -100,7 +101,7 @@ public class ResponseBodyParser<T> {
                         newUser
                 );
             } catch (JsonProcessingException ex) {
-                throw new ResponseParsingException(ex);
+                throw new BodyParsingException(ex);
             }
         }
 
@@ -119,7 +120,7 @@ public class ResponseBodyParser<T> {
         try {
             var parsed = parseResponse(response);
             return new TerraApiResponseImpl<>(response, parsed.getParsedBody(), parsed.getRawBody(), parsed.getUser());
-        } catch (ResponseParsingException e) {
+        } catch (BodyParsingException e) {
             throw new TerraRuntimeException(e);
         }
     }

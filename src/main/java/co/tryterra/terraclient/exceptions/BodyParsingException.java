@@ -16,12 +16,16 @@
 
 package co.tryterra.terraclient.exceptions;
 
-public class ResponseParsingException extends TerraException {
-    public ResponseParsingException(Throwable throwable) {
+/**
+ * Exception thrown internally when a non-JSON payload, or malformed
+ * JSON payload is attempted to be parsed.
+ */
+public class BodyParsingException extends TerraException {
+    public BodyParsingException(Throwable throwable) {
         super(throwable);
     }
 
-    public ResponseParsingException(String text) {
+    public BodyParsingException(String text) {
         super(text);
     }
 }

@@ -16,6 +16,9 @@
 
 package co.tryterra.terraclient.exceptions;
 
+/**
+ * Base class for all checked exceptions thrown by this library.
+ */
 public class TerraException extends Exception {
     public TerraException(String text) {
         super(text);
