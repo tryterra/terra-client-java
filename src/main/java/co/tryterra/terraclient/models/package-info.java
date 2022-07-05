@@ -19,6 +19,6 @@
  * <br>
  * You should assume that every attribute of every class defined in this package
  * can be {@link co.tryterra.terraclient.api.annotations.Nullable} unless defined
- * otherwise by the Terra API documentation.
+ * otherwise by the Terra <a href="https://docs.tryterra.co">API documentation</a>.
  */
 package co.tryterra.terraclient.models;
