@@ -16,6 +16,7 @@
 
 package co.tryterra.terraclient.api;
 
+import co.tryterra.terraclient.api.annotations.Nullable;
 import co.tryterra.terraclient.models.Athlete;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
@@ -49,11 +50,12 @@ public interface TerraWebhookPayload {
     String getType();
 
     /**
-     * Get the user that the webhook event is for.
+     * Get the user that the webhook event is for. Note that this will not be present
+     * for events of type {@code user_reauth}.
      *
-     * @return the user for the event
+     * @return {@link Optional} containing the user for the event
      */
-    User getUser();
+    Optional<User> getUser();
 
     /**
      * Attempt to parse the raw payload as an {@link Athlete} object. If

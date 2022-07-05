@@ -80,8 +80,11 @@ public class TerraWebhookPayloadImpl implements TerraWebhookPayload {
     }
 
     @Override
-    public User getUser() {
-        return jsonNodeToObject(rawBody.get("user"), UserImpl.class);
+    public Optional<User> getUser() {
+        if (rawBody.get("user") == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(jsonNodeToObject(rawBody.get("user"), UserImpl.class));
     }
 
     @Override
