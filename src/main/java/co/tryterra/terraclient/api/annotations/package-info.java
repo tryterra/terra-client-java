@@ -15,12 +15,6 @@
  */
 
 /**
- * The base package for the Java client library for interacting with the Terra
- * <a href="https://docs.tryterra.co">REST API</a>.
- * <br>
- * This package is a non-null API. Anything that can be {@code null} will be either
- * explicitly annotated with {@link co.tryterra.terraclient.api.annotations.Nullable},
- * or if an entire package should be considered nullable, it will be mentioned in that
- * package's respective {@code package-info.java} file.
+ * This package contains all the annotations used by this library.
  */
-package co.tryterra.terraclient;
+package co.tryterra.terraclient.api.annotations;
