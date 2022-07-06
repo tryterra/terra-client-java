@@ -87,10 +87,6 @@ public class WebhookHandlerUtility {
 
         String timestamp = matcher.group("t");
         String signature = matcher.group("s");
-        if (timestamp == null || signature == null) {
-            logger.debug("Timestamp or signature match group null after parsing");
-            return false;
-        }
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(
                 secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"
