@@ -84,6 +84,8 @@ public class WebhookHandlerUtility {
      * @param signatureHeader the value of the {@code terra-signature} header sent with the webhook request
      * @param requestBody the raw string request body sent with the webhook request
      * @return boolean indicating whether the signature could be verified successfully
+     * @throws IllegalStateException if your jdk installation is missing the HmacSHA256 algorithm
+     * @throws IllegalStateException if your secret key is invalid
      */
     public boolean verifySignature(String signatureHeader, String requestBody) {
         var pattern = Pattern.compile("t=(?<t>\\d+),v1=(?<s>[\\da-f]+)");
@@ -104,8 +106,7 @@ public class WebhookHandlerUtility {
         try {
             digest.init(secretKeySpec);
         } catch (InvalidKeyException ex) {
-            logger.error("Invalid secret key passed", ex);
-            return false;
+            throw new IllegalStateException("Secret key is invalid", ex);
         }
 
         digest.update(timestamp.getBytes(StandardCharsets.UTF_8));
