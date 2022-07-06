@@ -58,7 +58,7 @@ public class ResponseBodyParser<T> {
         private final User user;
     }
 
-    private T jsonNodeToObject(JsonNode node) {
+    T jsonNodeToObject(JsonNode node) {
         try {
             return restClient.getObjectMapper().treeToValue(node, parseTo);
         } catch (JsonProcessingException ex) {
@@ -67,7 +67,7 @@ public class ResponseBodyParser<T> {
         }
     }
 
-    private ParsedResponse<T> parseResponse(Response response) throws BodyParsingException {
+    ParsedResponse<T> parseResponse(Response response) throws BodyParsingException {
         if (response.body() == null) {
             throw new BodyParsingException("No body returned in response");
         }

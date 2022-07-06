@@ -50,7 +50,7 @@ public class TerraWebhookPayloadImpl implements TerraWebhookPayload {
         this.objectMapper = objectMapper;
     }
 
-    private <T> T jsonNodeToObject(JsonNode node, Class<T> parseTo) {
+    <T> T jsonNodeToObject(JsonNode node, Class<T> parseTo) {
         try {
             return objectMapper.treeToValue(node, parseTo);
         } catch (JsonProcessingException ex) {
@@ -59,7 +59,7 @@ public class TerraWebhookPayloadImpl implements TerraWebhookPayload {
         }
     }
 
-    private <T> List<T> parseDataAsList(JsonNode node, Class<T> parseTo) {
+    <T> List<T> parseDataAsList(JsonNode node, Class<T> parseTo) {
         if (node == null || !node.isArray()) {
             return Collections.emptyList();
         }

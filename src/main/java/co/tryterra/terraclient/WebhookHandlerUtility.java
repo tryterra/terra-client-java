@@ -60,7 +60,7 @@ public class WebhookHandlerUtility {
         this.secret = secret;
     }
 
-    private static String bytesToHex(byte[] bytes) {
+    static String bytesToHex(byte[] bytes) {
         byte[] hexChars = new byte[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {
             int v = bytes[j] & 0xFF;
@@ -68,6 +68,14 @@ public class WebhookHandlerUtility {
             hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
         }
         return new String(hexChars, StandardCharsets.UTF_8);
+    }
+
+    static Mac getMacInstance(String algorithm) {
+        try {
+            return Mac.getInstance(algorithm);
+        } catch (NoSuchAlgorithmException ex) {
+            throw new IllegalStateException("Missing algorithm: " + algorithm, ex);
+        }
     }
 
     /**
@@ -92,12 +100,11 @@ public class WebhookHandlerUtility {
                 secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"
         );
 
-        Mac digest;
+        Mac digest = getMacInstance("HmacSHA256");
         try {
-            digest = Mac.getInstance("HmacSHA256");
             digest.init(secretKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeyException ex) {
-            logger.error("HmacSHA256 algorithm not found or invalid secret key passed", ex);
+        } catch (InvalidKeyException ex) {
+            logger.error("Invalid secret key passed", ex);
             return false;
         }
 

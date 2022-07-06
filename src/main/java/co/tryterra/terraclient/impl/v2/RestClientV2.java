@@ -77,13 +77,13 @@ public class RestClientV2 {
         return objectMapper;
     }
 
-    private Request.Builder addAuthHeadersToBuilder(Request.Builder builder) {
+    Request.Builder addAuthHeadersToBuilder(Request.Builder builder) {
         return builder
                 .addHeader("X-API-Key", xApiKey)
                 .addHeader("dev-id", devId);
     }
 
-    private void addQueryParametersToBuilder(HttpUrl.Builder builder, RequestConfig requestConfig, Instant startTime, Instant endTime) {
+    void addQueryParametersToBuilder(HttpUrl.Builder builder, RequestConfig requestConfig, Instant startTime, Instant endTime) {
         Objects.requireNonNull(startTime, "startTime cannot be null for this request");
 
         builder
@@ -101,7 +101,7 @@ public class RestClientV2 {
         }
     }
 
-    private <T> CompletableFuture<TerraApiResponse<T>> performAsyncCall(Request request, PartialUser user, String key, Class<T> parseTo) {
+    <T> CompletableFuture<TerraApiResponse<T>> performAsyncCall(Request request, PartialUser user, String key, Class<T> parseTo) {
         return new OkHttp3AsyncCall(httpClient.newCall(request))
                 .asCompletionStage()
                 .thenApplyAsync(response -> new ResponseBodyParser<>(user, key, parseTo, this)
