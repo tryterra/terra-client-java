@@ -16,6 +16,9 @@
 
 package co.tryterra.terraclient;
 
+import co.tryterra.terraclient.api.TerraWebhookPayload;
+import co.tryterra.terraclient.impl.TerraWebhookPayloadImpl;
+import co.tryterra.terraclient.impl.UserImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,5 +43,20 @@ class TestWebhookHandlerUtility {
                 "t=12345678,v1=599aa529690b885a43f184327c582375068d70705b7a471af15e10682c6f5313",
                 "{'bar':'baz'}"
         )).isTrue();
+    }
+
+    @Test
+    void testParseWebhookPayloadReturnsObjectWithCorrectType() {
+        var handler = new WebhookHandlerUtility("foo");
+        assertThat(handler.parseWebhookPayload("{\"type\":\"bar\"}").getType()).isEqualTo("bar");
+    }
+
+    @Test
+    void testParseWebhookPayloadReturnsObjectWithUser() {
+        var handler = new WebhookHandlerUtility("foo");
+        var parsed = handler.parseWebhookPayload(
+                "{\"user\":{\"user_id\":\"bar\",\"provider\":\"baz\",\"last_webhook_update\":null}}");
+        assertThat(parsed.getUser().isPresent()).isTrue();
+        assertThat(parsed.getUser().get().getId()).isEqualTo("bar");
     }
 }
