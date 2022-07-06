@@ -60,9 +60,10 @@ jobs:
 
       - name: Update POM version
         run: |
-          ./mvnw -B versions:set -DnewVersion="$(echo '${{ steps.version.outputs.VERSION }}' | perl -pe 's/^((\d+\.)*)(\d+)(.*)$/$1.($3+1).$4/e')"
+          ./mvnw -B -q versions:set -DnewVersion="$(echo '${{ steps.version.outputs.VERSION }}' | perl -pe 's/^((\d+\.)*)(\d+)(.*)$/$1.($3+1).$4/e')"
           rm pom.xml.versionsBackup
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Bump project version"
+          branch: master
