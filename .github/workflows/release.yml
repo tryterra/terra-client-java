@@ -7,7 +7,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,8 @@ jobs:
         MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-  update-version:
+  bump-version:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
