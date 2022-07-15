@@ -40,7 +40,7 @@ jobs:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
   bump-version:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
 
     steps:
