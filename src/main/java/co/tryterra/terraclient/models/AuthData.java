@@ -22,6 +22,6 @@ import lombok.Data;
 @Data
 public class AuthData {
     private final User user;
-    private final String reference_id;
-    private final String widget_session_id;
+    private final String referenceId;
+    private final String widgetSessionId;
 }
