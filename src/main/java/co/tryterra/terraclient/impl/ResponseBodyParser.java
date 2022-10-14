@@ -85,7 +85,7 @@ public class ResponseBodyParser<T> {
 
         User newUser = null;
         if (user != null && rawBody.get("user") != null) {
-            newUser = new UserImpl(rawBody.get("user"), null, null, null);
+            newUser = new UserImpl(rawBody.get("user"), null, null, null, null);
         }
 
         if (rawBody.get(key) == null) {

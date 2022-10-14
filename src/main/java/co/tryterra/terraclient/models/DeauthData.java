@@ -14,32 +14,12 @@
  * limitations under the License.
  */
 
-package co.tryterra.terraclient.api;
+package co.tryterra.terraclient.models;
 
-import java.time.OffsetDateTime;
+import co.tryterra.terraclient.api.User;
+import lombok.Data;
 
-/**
- * Interface representing a full Terra user.
- */
-public interface User extends PartialUser{
-    /**
-     * The provider that this user is registered with.
-     *
-     * @return the user's provider
-     */
-    String getProvider();
-
-    /**
-     * The last time the user's data was attempted to be updated by Terra.
-     *
-     * @return the user's last webhook update
-     */
-    OffsetDateTime getLastWebhookUpdate();
-
-    /**
-     * The scopes that this user allowed.
-     *
-     * @return the user's scopes
-     */
-    String getScopes();
+@Data
+public class DeauthData {
+    private final User user;
 }

@@ -30,15 +30,18 @@ public class UserImpl implements User {
     private final String id;
     private final String provider;
     private final OffsetDateTime lastWebhookUpdate;
+    private final String scopes;
 
     @JsonCreator
     public UserImpl(
             @JsonProperty("user") JsonNode user, @JsonProperty("user_id") String id,
-            @JsonProperty("provider") String provider, @JsonProperty("last_webhook_update") String lastWebhookUpdate
+            @JsonProperty("provider") String provider, @JsonProperty("last_webhook_update") String lastWebhookUpdate,
+            @JsonProperty("scopes") String scopes
     ) {
         this.id = id == null ? user.get("user_id").asText() : id;
         this.provider = provider == null ? user.get("provider").asText() : provider;
-
+        this.scopes = scopes == null ? user.get("scopes").asText() : scopes;
+        
         String lastWhUpdate = lastWebhookUpdate;
         if (lastWhUpdate == null && user != null && !user.get("last_webhook_update").isNull()) {
             lastWhUpdate = user.get("last_webhook_update").asText();
@@ -59,5 +62,10 @@ public class UserImpl implements User {
     @Override
     public OffsetDateTime getLastWebhookUpdate() {
         return this.lastWebhookUpdate;
+    }
+
+    @Override
+    public String getScopes() {
+        return this.scopes;
     }
 }
