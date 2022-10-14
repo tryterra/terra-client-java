@@ -58,7 +58,7 @@ class TestWebhookHandlerUtility {
     void testParseWebhookPayloadReturnsObjectWithUser() {
         var handler = new WebhookHandlerUtility("foo");
         var parsed = handler.parseWebhookPayload(
-                "{\"user\":{\"user_id\":\"bar\",\"provider\":\"baz\",\"last_webhook_update\":null}}");
+                "{\"user\":{\"user_id\":\"bar\",\"provider\":\"baz\",\"last_webhook_update\":null,\"scopes\":null}}");
         assertThat(parsed.getUser().isPresent()).isTrue();
         assertThat(parsed.getUser().get().getId()).isEqualTo("bar");
     }

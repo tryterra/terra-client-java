@@ -34,19 +34,26 @@ public class UserImpl implements User {
 
     @JsonCreator
     public UserImpl(
-            @JsonProperty("user") JsonNode user, @JsonProperty("user_id") String id,
-            @JsonProperty("provider") String provider, @JsonProperty("last_webhook_update") String lastWebhookUpdate,
+            @JsonProperty("user") JsonNode user,
+            @JsonProperty("user_id") String id,
+            @JsonProperty("provider") String provider,
+            @JsonProperty("last_webhook_update") String lastWebhookUpdate,
             @JsonProperty("scopes") String scopes
     ) {
         this.id = id == null ? user.get("user_id").asText() : id;
         this.provider = provider == null ? user.get("provider").asText() : provider;
-        this.scopes = scopes == null ? user.get("scopes").asText() : scopes;
         
         String lastWhUpdate = lastWebhookUpdate;
         if (lastWhUpdate == null && user != null && !user.get("last_webhook_update").isNull()) {
             lastWhUpdate = user.get("last_webhook_update").asText();
         }
         this.lastWebhookUpdate = lastWhUpdate == null ? null : OffsetDateTime.parse(lastWhUpdate, dateTimeFormatter);
+
+        String scopesTemp = scopes;
+        if (scopesTemp == null && user != null && !user.get("scopes").isNull()) {
+            scopesTemp = user.get("scopes").asText();
+        }
+        this.scopes = scopesTemp == null ? null : scopesTemp;
     }
 
     @Override
