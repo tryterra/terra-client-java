@@ -19,7 +19,10 @@ package co.tryterra.terraclient.impl;
 import co.tryterra.terraclient.api.TerraWebhookPayload;
 import co.tryterra.terraclient.api.User;
 import co.tryterra.terraclient.models.Athlete;
+import co.tryterra.terraclient.models.AuthData;
+import co.tryterra.terraclient.models.DeauthData;
 import co.tryterra.terraclient.models.ReauthData;
+import co.tryterra.terraclient.models.RequestProcessing;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
@@ -89,6 +92,28 @@ public class TerraWebhookPayloadImpl implements TerraWebhookPayload {
     }
 
     @Override
+    public Optional<AuthData> asAuthData() {
+        if (!getType().equals("auth")) {
+            return Optional.empty();
+        }
+        return Optional.of(new AuthData(
+                jsonNodeToObject(rawBody.get("user"), UserImpl.class),
+                jsonNodeToObject(rawBody.get("reference_id"), String.class),
+                jsonNodeToObject(rawBody.get("widget_session_id"), String.class)
+        ));
+    }
+    
+    @Override
+    public Optional<DeauthData> asDeauthData() {
+        if (!getType().equals("deauth")) {
+            return Optional.empty();
+        }
+        return Optional.of(new DeauthData(
+                jsonNodeToObject(rawBody.get("user"), UserImpl.class)
+        ));
+    }
+
+    @Override
     public Optional<ReauthData> asReauthData() {
         if (!getType().equals("user_reauth")) {
             return Optional.empty();
@@ -153,5 +178,16 @@ public class TerraWebhookPayloadImpl implements TerraWebhookPayload {
             return Optional.empty();
         }
         return Optional.of(parseDataAsList(rawBody.get("data"), Sleep.class));
+    }
+
+    @Override
+    public Optional<RequestProcessing> asRequestProcessing() {
+        if (!getType().equals("request_processing")) {
+            return Optional.empty();
+        }
+        return Optional.of(new RequestProcessing(
+                jsonNodeToObject(rawBody.get("user"), UserImpl.class),
+                jsonNodeToObject(rawBody.get("reference"), String.class)
+        ));
     }
 }

@@ -16,9 +16,11 @@
 
 package co.tryterra.terraclient.api;
 
-import co.tryterra.terraclient.api.annotations.Nullable;
 import co.tryterra.terraclient.models.Athlete;
+import co.tryterra.terraclient.models.AuthData;
+import co.tryterra.terraclient.models.DeauthData;
 import co.tryterra.terraclient.models.ReauthData;
+import co.tryterra.terraclient.models.RequestProcessing;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
@@ -66,6 +68,24 @@ public interface TerraWebhookPayload {
      * @return {@link Optional} containing the parsed data, if available
      */
     Optional<ReauthData> asReauthData();
+
+    /**
+     * Attempt to parse the raw payload as a {@link AuthData} object. If
+     * the event type is not {@code auth} then this will fail and an
+     * empty {@link Optional} will be returned.
+     *
+     * @return {@link Optional} containing the parsed data, if available
+     */
+    Optional<AuthData> asAuthData();
+
+    /**
+     * Attempt to parse the raw payload as a {@link DeauthData} object. If
+     * the event type is not {@code deauth} then this will fail and an
+     * empty {@link Optional} will be returned.
+     *
+     * @return {@link Optional} containing the parsed data, if available
+     */
+    Optional<DeauthData> asDeauthData();
 
     /**
      * Attempt to parse the raw payload as an {@link Athlete} object. If
@@ -129,4 +149,13 @@ public interface TerraWebhookPayload {
      * @return {@link Optional} containing the parsed data, if available
      */
     Optional<List<Sleep>> asSleepV2();
+
+    /**
+     * Attempt to parse the raw payload as an {@link RequestProcessing} object. If
+     * the event type is not {@code request_processing} then this will fail and an
+     * empty {@link Optional} will be returned.
+     *
+     * @return {@link Optional} containing the parsed data, if available
+     */
+    Optional<RequestProcessing> asRequestProcessing();
 }
