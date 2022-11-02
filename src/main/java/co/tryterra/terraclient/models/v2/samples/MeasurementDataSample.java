@@ -46,12 +46,12 @@ public class MeasurementDataSample {
     private Float weightKg;
     @JsonProperty("height_cm")
     private Float heightCm;
-    @JsonProperty("bone_mass_kg")
-    private Float boneMassKg;
-    @JsonProperty("muscle_mass_kg")
-    private Float muscleMassKg;
-    @JsonProperty("lean_mass_kg")
-    private Float leanMassKg;
+    @JsonProperty("bone_mass_g")
+    private Float boneMassG;
+    @JsonProperty("muscle_mass_g")
+    private Float muscleMassG;
+    @JsonProperty("lean_mass_g")
+    private Float leanMassG;
     @JsonProperty("water_percentage")
     private Float waterPercentage;
     @JsonProperty("insulin_units")
