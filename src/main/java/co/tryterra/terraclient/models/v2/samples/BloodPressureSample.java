@@ -29,8 +29,8 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BloodPressureSample {
     private String timestamp;
-    @JsonProperty("diastolic_bp_mmHg")
-    private float diastolicBpMmHg;
-    @JsonProperty("systolic_bp_mmHg")
-    private float systolicBpMmHg;
+    @JsonProperty("diastolic_bp")
+    private float diastolicBp;
+    @JsonProperty("systolic_bp")
+    private float systolicBp;
 }
