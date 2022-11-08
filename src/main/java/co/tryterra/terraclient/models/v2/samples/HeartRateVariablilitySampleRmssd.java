@@ -29,6 +29,6 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HeartRateVariablilitySampleRmssd {
     private String timestamp;
-    @JsonProperty("hrv_sdnn")
-    private double hrvSdnn;
+    @JsonProperty("hrv_rmssd")
+    private double hrvRmssd;
 }
