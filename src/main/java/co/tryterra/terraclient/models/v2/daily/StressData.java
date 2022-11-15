@@ -41,6 +41,8 @@ public class StressData {
     private Float avgStressLevel;
     @JsonProperty("low_stress_duration_seconds")
     private Integer lowStressDurationSeconds;
+    @JsonProperty("medium_stress_duration_seconds")
+    private Integer mediumStressDurationSeconds;
     @JsonProperty("high_stress_duration_seconds")
     private Integer highStressDurationSeconds;
     @JsonProperty("max_stress_level")

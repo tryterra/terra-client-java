@@ -29,7 +29,7 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GlucoseDataSample {
     private String timestamp;
-    @JsonProperty("blood_glucose_mg_per_dl")
+    @JsonProperty("blood_glucose_mg_per_dL")
     private Double bloodGlucoseMgPerDl;
     @JsonProperty("glucose_level_flag")
     private Integer glucoseLevelFlag;
