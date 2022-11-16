@@ -31,8 +31,10 @@ import java.util.List;
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GlucoseData {
-    @JsonProperty("day_avg_blood_glucose_mg_per_dl")
+    @JsonProperty("day_avg_blood_glucose_mg_per_dL")
     private Float dayAvgBloodGlucoseMgPerDl;
     @JsonProperty("blood_glucose_samples")
     private List<GlucoseDataSample> bloodGlucoseSamples;
+    @JsonProperty("detailed_blood_glucose_samples")
+    private List<GlucoseDataSample> detailedBloodGlucoseSamples;
 }
