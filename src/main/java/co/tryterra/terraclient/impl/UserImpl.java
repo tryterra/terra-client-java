@@ -18,12 +18,14 @@ package co.tryterra.terraclient.impl;
 
 import co.tryterra.terraclient.api.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserImpl implements User {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
@@ -31,6 +33,7 @@ public class UserImpl implements User {
     private final String provider;
     private final OffsetDateTime lastWebhookUpdate;
     private final String scopes;
+    private final String referenceId;
 
     @JsonCreator
     public UserImpl(
@@ -38,10 +41,12 @@ public class UserImpl implements User {
             @JsonProperty("user_id") String id,
             @JsonProperty("provider") String provider,
             @JsonProperty("last_webhook_update") String lastWebhookUpdate,
-            @JsonProperty("scopes") String scopes
+            @JsonProperty("scopes") String scopes,
+            @JsonProperty("reference_id") String referenceId
     ) {
         this.id = id == null ? user.get("user_id").asText() : id;
         this.provider = provider == null ? user.get("provider").asText() : provider;
+        this.referenceId = referenceId == null ? user.get("reference_id").asText() : referenceId;
         
         String lastWhUpdate = lastWebhookUpdate;
         if (lastWhUpdate == null && user != null && !user.get("last_webhook_update").isNull()) {
