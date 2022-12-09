@@ -42,4 +42,6 @@ public interface User extends PartialUser{
      * @return the user's scopes
      */
     String getScopes();
+
+    String getReferenceId();
 }

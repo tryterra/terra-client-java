@@ -48,12 +48,12 @@ public class TerraApiResponseImpl<T> implements TerraApiResponse<T> {
 
     @Override
     public String getType() {
-        return rawBody.get("type").asText();
+        return rawBody.get("type") == null ? null : rawBody.get("type").asText();
     }
 
     @Override
     public String getMessage() {
-        return rawBody.get("message").asText();
+        return rawBody.get("message") == null ? null : rawBody.get("message").asText();
     }
 
     @Override

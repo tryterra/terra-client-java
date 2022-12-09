@@ -17,10 +17,12 @@
 package co.tryterra.terraclient.impl;
 
 import co.tryterra.terraclient.api.User;
+import co.tryterra.terraclient.api.annotations.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
+import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,8 +33,11 @@ public class UserImpl implements User {
 
     private final String id;
     private final String provider;
+    @Nullable
     private final OffsetDateTime lastWebhookUpdate;
+    @Nullable
     private final String scopes;
+    @Nullable
     private final String referenceId;
 
     @JsonCreator
@@ -46,19 +51,24 @@ public class UserImpl implements User {
     ) {
         this.id = id == null ? user.get("user_id").asText() : id;
         this.provider = provider == null ? user.get("provider").asText() : provider;
-        this.referenceId = referenceId == null ? user.get("reference_id").asText() : referenceId;
+
+        String referenceIdTemp = referenceId;
+        if (referenceIdTemp == null && user != null && !(user.get("reference_id") == null)) {
+            referenceIdTemp = user.get("reference_id").asText();
+        }
+        this.referenceId = referenceIdTemp;
         
         String lastWhUpdate = lastWebhookUpdate;
-        if (lastWhUpdate == null && user != null && !user.get("last_webhook_update").isNull()) {
+        if (lastWhUpdate == null && user != null && !(user.get("last_webhook_update") == null)) {
             lastWhUpdate = user.get("last_webhook_update").asText();
         }
         this.lastWebhookUpdate = lastWhUpdate == null ? null : OffsetDateTime.parse(lastWhUpdate, dateTimeFormatter);
 
         String scopesTemp = scopes;
-        if (scopesTemp == null && user != null && !user.get("scopes").isNull()) {
+        if (scopesTemp == null && user != null && !(user.get("scopes") == null)) {
             scopesTemp = user.get("scopes").asText();
         }
-        this.scopes = scopesTemp == null ? null : scopesTemp;
+        this.scopes = scopesTemp;
     }
 
     @Override
@@ -79,5 +89,10 @@ public class UserImpl implements User {
     @Override
     public String getScopes() {
         return this.scopes;
+    }
+
+    @Override
+    public String getReferenceId() {
+        return this.referenceId;
     }
 }

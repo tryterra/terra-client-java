@@ -36,6 +36,7 @@ class TestUserImpl {
         node.put("provider", "bar");
         node.put("last_webhook_update", "2022-01-01T00:00:00+00:00");
         node.put("scopes", "ACTIVITY");
+        node.put("reference_id", "user_1");
 
         var user = objectMapper.treeToValue(node, UserImpl.class);
         assertThat(user.getId()).isEqualTo("foo");
@@ -43,6 +44,7 @@ class TestUserImpl {
         assertThat(user.getLastWebhookUpdate())
                 .isEqualTo(OffsetDateTime.ofInstant(Instant.ofEpochSecond(1640995200L), ZoneId.of("UTC")));
         assertThat(user.getScopes()).isEqualTo("ACTIVITY");
+        assertThat(user.getReferenceId()).isEqualTo("user_1");
     }
 
     @Test
@@ -52,6 +54,7 @@ class TestUserImpl {
         subNode.put("provider", "bar");
         subNode.put("last_webhook_update", "2022-01-01T00:00:00+00:00");
         subNode.put("scopes", "ACTIVITY");
+        subNode.put("reference_id", "user_1");
         var outerNode = objectMapper.createObjectNode();
         outerNode.set("user", subNode);
 
@@ -61,5 +64,6 @@ class TestUserImpl {
         assertThat(user.getLastWebhookUpdate())
                 .isEqualTo(OffsetDateTime.ofInstant(Instant.ofEpochSecond(1640995200L), ZoneId.of("UTC")));
         assertThat(user.getScopes()).isEqualTo("ACTIVITY");
+        assertThat(user.getReferenceId()).isEqualTo("user_1");
     }
 }
