@@ -49,24 +49,24 @@ public class UserImpl implements User {
             @JsonProperty("scopes") String scopes,
             @JsonProperty("reference_id") String referenceId
     ) {
-        this.id = id == null ? user.get("user_id").asText() : id;
-        this.provider = provider == null ? user.get("provider").asText() : provider;
+        this.id = id == null ? user.get("user_id").textValue() : id;
+        this.provider = provider == null ? user.get("provider").textValue() : provider;
 
         String referenceIdTemp = referenceId;
-        if (referenceIdTemp == null && user != null && !(user.get("reference_id") == null)) {
-            referenceIdTemp = user.get("reference_id").asText();
+        if (referenceIdTemp == null && user != null && !user.get("reference_id").isNull()) {
+            referenceIdTemp = user.get("reference_id").textValue();
         }
         this.referenceId = referenceIdTemp;
         
         String lastWhUpdate = lastWebhookUpdate;
-        if (lastWhUpdate == null && user != null && !(user.get("last_webhook_update") == null)) {
-            lastWhUpdate = user.get("last_webhook_update").asText();
+        if (lastWhUpdate == null && user != null && !user.get("last_webhook_update").isNull()) {
+            lastWhUpdate = user.get("last_webhook_update").textValue();
         }
         this.lastWebhookUpdate = lastWhUpdate == null ? null : OffsetDateTime.parse(lastWhUpdate, dateTimeFormatter);
 
         String scopesTemp = scopes;
-        if (scopesTemp == null && user != null && !(user.get("scopes") == null)) {
-            scopesTemp = user.get("scopes").asText();
+        if (scopesTemp == null && user != null && !user.get("scopes").isNull()) {
+            scopesTemp = user.get("scopes").textValue();
         }
         this.scopes = scopesTemp;
     }
