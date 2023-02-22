@@ -88,7 +88,8 @@ public class RestClientV2 {
 
         builder
                 .addQueryParameter("start_date", String.valueOf(startTime.getEpochSecond()))
-                .addQueryParameter("to_webhook", requestConfig.isToWebhook() ? "true" : "false");
+                .addQueryParameter("to_webhook", requestConfig.isToWebhook() ? "true" : "false")
+                .addQueryParameter("retry_if_rate_limited", requestConfig.isRetryIfRateLimited() ? "true": "false");
 
         if (endTime != null) {
             builder.addQueryParameter("end_date", String.valueOf(endTime.getEpochSecond()));

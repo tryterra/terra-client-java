@@ -25,10 +25,12 @@ import java.util.Objects;
 public class RequestConfig {
     private final boolean toWebhook;
     private final Samples withSamples;
+    private final boolean retryIfRateLimited;
 
     RequestConfig(Builder builder) {
         this.toWebhook = builder.toWebhook;
         this.withSamples = builder.withSamples;
+        this.retryIfRateLimited = builder.retryIfRateLimited;
     }
 
     /**
@@ -55,6 +57,7 @@ public class RequestConfig {
      */
     public static class Builder {
         private boolean toWebhook = true;
+        private boolean retryIfRateLimited = false;
         private Samples withSamples = Samples.ACCOUNT_DEFAULT;
 
         Builder() {}
@@ -78,6 +81,17 @@ public class RequestConfig {
          */
         public Builder toWebhook(boolean value) {
             this.toWebhook = value;
+            return this;
+        }
+
+        /**
+         * Set whether to retry the request if the request has been rate limited by the provider.
+         *
+         * @param value boolean to set the {@code to_webhook} parameter to
+         * @return this builder object for method chaining
+         */
+        public Builder retryIfRateLimited(boolean value){
+            this.retryIfRateLimited = value;
             return this;
         }
 
@@ -122,5 +136,17 @@ public class RequestConfig {
      */
     public boolean isToWebhook() {
         return toWebhook;
+    }
+
+
+    /**
+     * The value that will be sent to indicate whether the request will be retried later if
+     * rate limited.
+     * <br>
+     *
+     * @return value for the {@code to_webhook} query parameter
+     */
+    public boolean isRetryIfRateLimited(){
+        return retryIfRateLimited;
     }
 }
