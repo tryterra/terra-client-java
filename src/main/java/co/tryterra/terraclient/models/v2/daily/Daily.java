@@ -39,6 +39,8 @@ public class Daily {
     private DistanceData distanceData;
     @JsonProperty("MET_data")
     private MetData metData;
+    @JsonProperty("scores")
+    private ScoresData scores;
     @JsonProperty("calories_data")
     private CaloriesData caloriesData;
     @JsonProperty("heart_rate_data")

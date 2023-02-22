@@ -14,37 +14,21 @@
  * limitations under the License.
  */
 
-package co.tryterra.terraclient.models.v2.common;
+package co.tryterra.terraclient.models.v2.daily;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Data
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Macros {
-    private Double calories;
-    @JsonProperty("protein_g")
-    private Float proteinG;
-    @JsonProperty("carbohydrates_g")
-    private Float carbohydratesG;
-    @JsonProperty("trans_fat_g")
-    private Float transFatG;
-    @JsonProperty("fat_g")
-    private Float fatG;
-    @JsonProperty("sugar_g")
-    private Float sugarG;
-    @JsonProperty("cholesterol_mg")
-    private Float cholesterolMg;
-    @JsonProperty("fiber_g")
-    private Float fiberG;
-    @JsonProperty("sodium_mg")
-    private Float sodiumMg;
-    @JsonProperty("alcohol_g")
-    private Float alcoholG;
+public class ScoresData {
+    private Integer recovery;
+    private Integer sleep;
+    private Integer activity;
 }
