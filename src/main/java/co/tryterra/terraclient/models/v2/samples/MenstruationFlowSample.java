@@ -26,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HeartRateDataSample {
+public class MenstruationFlowSample {
     private String timestamp;
-    private Double bpm;
+    private Integer flow;
 }

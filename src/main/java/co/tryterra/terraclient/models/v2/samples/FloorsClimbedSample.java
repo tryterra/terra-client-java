@@ -17,6 +17,7 @@
 package co.tryterra.terraclient.models.v2.samples;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HeartRateDataSample {
+public class FloorsClimbedSample {
     private String timestamp;
-    private Double bpm;
+    @JsonProperty("floors_climbed")
+    private Double floorsClimbed;
+    @JsonProperty("timer_duration_seconds")
+    private Double timerDurationSeconds;
 }

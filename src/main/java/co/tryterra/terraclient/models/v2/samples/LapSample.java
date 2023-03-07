@@ -30,7 +30,15 @@ import lombok.Setter;
 public class LapSample {
     @JsonProperty("start_time")
     private String startTime;
+    @JsonProperty("end_time")
+    private String endTime;
     @JsonProperty("distance_meters")
     private Double distanceMeters;
     private Double calories;
+    @JsonProperty("total_strokes")
+    private Double totalStrokes;
+    @JsonProperty("stroke_type")
+    private Integer strokeType;
+    @JsonProperty("avg_speed_meters_per_second")
+    private Double avgSpeedMetersPerSecond;
 }
