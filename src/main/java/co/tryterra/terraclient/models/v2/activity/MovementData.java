@@ -52,10 +52,10 @@ public class MovementData {
     private Double avgVelocityMetersPerSecond;
     @JsonProperty("avg_torque_newton_meters")
     private Double avgTorqueNewtonMeters;
-    @JsonProperty("max_speed_meters_per_second")
-    private Double maxSpeedMetersPerSecond;
     @JsonProperty("cadence_samples")
     private List<CadenceSample> cadenceSamples;
     @JsonProperty("speed_samples")
     private List<SpeedSample> speedSamples;
+    @JsonProperty("max_speed_meters_per_second")
+    private Double maxSpeedMetersPerSecond;
 }

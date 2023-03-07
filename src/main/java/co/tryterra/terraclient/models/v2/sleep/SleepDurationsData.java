@@ -36,9 +36,9 @@ public class SleepDurationsData {
     @Setter(AccessLevel.NONE)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Other {
-        @JsonProperty("durationInBedSeconds")
+        @JsonProperty("duration_in_be_seconds")
         private Integer durationInBedSeconds;
-        @JsonProperty("durationUnmeasureableSleepSeconds")
+        @JsonProperty("duration_unmeasureable_sleep_seconds")
         private Integer durationUnmeasureableSleepSeconds;
     }
 
@@ -48,19 +48,19 @@ public class SleepDurationsData {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Awake {
         @JsonProperty("duration_short_interruption_seconds")
-        private Integer durationShortInterruptionSeconds;
+        private Double durationShortInterruptionSeconds;
         @JsonProperty("duration_awake_state_seconds")
-        private Integer durationAwakeStateSeconds;
+        private Double durationAwakeStateSeconds;
         @JsonProperty("duration_long_interruption_seconds")
-        private Integer durationLongInterruptionSeconds;
+        private Double durationLongInterruptionSeconds;
         @JsonProperty("num_wakeup_events")
         private Integer numWakeupEvents;
         @JsonProperty("wake_up_latency_seconds")
-        private Integer wakeUpLatencySeconds;
+        private Double wakeUpLatencySeconds;
         @JsonProperty("num_out_of_bed_events")
         private Integer numOutOfBedEvents;
         @JsonProperty("sleep_latency_seconds")
-        private Integer sleepLatencySeconds;
+        private Double sleepLatencySeconds;
     }
 
     @Data
@@ -69,15 +69,15 @@ public class SleepDurationsData {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Asleep {
         @JsonProperty("duration_light_sleep_state_seconds")
-        private Integer durationLightSleepStateSeconds;
+        private Double durationLightSleepStateSeconds;
         @JsonProperty("duration_asleep_state_seconds")
-        private Integer durationAsleepStateSeconds;
+        private Double durationAsleepStateSeconds;
         @JsonProperty("num_REM_events")
         private Integer numRemEvents;
         @JsonProperty("duration_REM_sleep_state_seconds")
-        private Integer durationRemSleepStateSeconds;
+        private Double durationRemSleepStateSeconds;
         @JsonProperty("duration_deep_sleep_state_seconds")
-        private Integer durationDeepSleepStateSeconds;
+        private Double durationDeepSleepStateSeconds;
     }
 
     @JsonProperty("sleep_efficiency")

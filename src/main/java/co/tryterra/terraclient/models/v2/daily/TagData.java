@@ -16,9 +16,8 @@
 
 package co.tryterra.terraclient.models.v2.daily;
 
-import co.tryterra.terraclient.models.v2.samples.StressSample;
+import co.tryterra.terraclient.models.v2.samples.TagEntry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,23 +29,6 @@ import java.util.List;
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class StressData {
-    @JsonProperty("rest_stress_duration_seconds")
-    private Double restStressDurationSeconds;
-    @JsonProperty("stress_duration_seconds")
-    private Double stressDurationSeconds;
-    @JsonProperty("activity_stress_duration_seconds")
-    private Double activityStressDurationSeconds;
-    @JsonProperty("avg_stress_level")
-    private Double avgStressLevel;
-    @JsonProperty("low_stress_duration_seconds")
-    private Double lowStressDurationSeconds;
-    @JsonProperty("medium_stress_duration_seconds")
-    private Double mediumStressDurationSeconds;
-    @JsonProperty("high_stress_duration_seconds")
-    private Double highStressDurationSeconds;
-    @JsonProperty("max_stress_level")
-    private Double maxStressLevel;
-    @JsonProperty("stress_samples")
-    private List<StressSample> stressSamples;
+public class TagData {
+    private TagEntry tags;
 }

@@ -28,7 +28,7 @@ import lombok.Setter;
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ScoresData {
-    private Integer recovery;
-    private Integer sleep;
-    private Integer activity;
+    private Double recovery;
+    private Double sleep;
+    private Double activity;
 }

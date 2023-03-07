@@ -19,6 +19,7 @@ package co.tryterra.terraclient.models.v2.common;
 import co.tryterra.terraclient.models.v2.samples.HeartRateDataSample;
 import co.tryterra.terraclient.models.v2.samples.HeartRateVariabilityDataSampleSdnn;
 import co.tryterra.terraclient.models.v2.samples.HeartRateVariablilitySampleRmssd;
+import co.tryterra.terraclient.models.v2.samples.HeartRateZoneData;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
@@ -52,6 +53,8 @@ public class HeartRateData {
         public Double avgHrvSdnn;
         @JsonProperty("avg_hr_bpm")
         public Integer avgHrBpm;
+        @JsonProperty("hr_zone_data")
+        public List<HeartRateZoneData> hrZoneData;
     }
 
     @Data

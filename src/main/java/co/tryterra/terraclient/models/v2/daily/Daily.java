@@ -33,6 +33,8 @@ public class Daily {
     private Metadata metadata;
     @JsonProperty("oxygen_data")
     private OxygenData oxygenData;
+    @JsonProperty("tag_data")
+    private TagData tagData;
     @JsonProperty("device_data")
     private DeviceData deviceData;
     @JsonProperty("distance_data")

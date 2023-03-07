@@ -18,6 +18,8 @@ package co.tryterra.terraclient.models.v2.common;
 
 import co.tryterra.terraclient.models.v2.samples.DistanceSample;
 import co.tryterra.terraclient.models.v2.samples.ElevationSample;
+import co.tryterra.terraclient.models.v2.samples.FloorsClimbedSample;
+import co.tryterra.terraclient.models.v2.samples.StepSample;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
@@ -86,6 +88,10 @@ public class DistanceData {
         private List<DistanceSample> distanceSamples;
         @JsonProperty("elevation_samples")
         private List<ElevationSample> elevationSamples;
+        @JsonProperty("step_samples")
+        private List<StepSample> stepSamples;
+        @JsonProperty("floors_climbed_samples")
+        private List<FloorsClimbedSample> floorsClimbedSample;
     }
 
     private Summary summary;
