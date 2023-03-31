@@ -36,7 +36,7 @@ public class SleepDurationsData {
     @Setter(AccessLevel.NONE)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Other {
-        @JsonProperty("duration_in_be_seconds")
+        @JsonProperty("duration_in_bed_seconds")
         private Integer durationInBedSeconds;
         @JsonProperty("duration_unmeasureable_sleep_seconds")
         private Integer durationUnmeasureableSleepSeconds;
