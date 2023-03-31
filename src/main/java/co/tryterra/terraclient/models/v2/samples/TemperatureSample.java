@@ -30,5 +30,5 @@ import lombok.Setter;
 public class TemperatureSample {
     private String timestamp;
     @JsonProperty("temperature_celsius")
-    private float temperatureCelsius;
+    private double temperatureCelsius;
 }

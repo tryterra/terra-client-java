@@ -32,5 +32,5 @@ public class DistanceSample {
     @JsonProperty("distance_meters")
     private double distanceMeters;
     @JsonProperty("timer_duration_seconds")
-    private Float timerDurationSeconds;
+    private Double timerDurationSeconds;
 }

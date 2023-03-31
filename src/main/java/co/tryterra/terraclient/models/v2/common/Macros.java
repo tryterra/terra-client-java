@@ -30,21 +30,21 @@ import lombok.Setter;
 public class Macros {
     private Double calories;
     @JsonProperty("protein_g")
-    private Float proteinG;
+    private Double proteinG;
     @JsonProperty("carbohydrates_g")
-    private Float carbohydratesG;
+    private Double carbohydratesG;
     @JsonProperty("trans_fat_g")
-    private Float transFatG;
+    private Double transFatG;
     @JsonProperty("fat_g")
-    private Float fatG;
+    private Double fatG;
     @JsonProperty("sugar_g")
-    private Float sugarG;
+    private Double sugarG;
     @JsonProperty("cholesterol_mg")
-    private Float cholesterolMg;
+    private Double cholesterolMg;
     @JsonProperty("fiber_g")
-    private Float fiberG;
+    private Double fiberG;
     @JsonProperty("sodium_mg")
-    private Float sodiumMg;
+    private Double sodiumMg;
     @JsonProperty("alcohol_g")
-    private Float alcoholG;
+    private Double alcoholG;
 }

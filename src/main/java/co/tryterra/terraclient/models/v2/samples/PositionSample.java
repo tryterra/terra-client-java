@@ -34,5 +34,5 @@ public class PositionSample {
     @JsonProperty("coords_lat_lng_deg")
     private List<Double> coordsLatLngDeg;
     @JsonProperty("timer_duration_seconds")
-    private Float timerDurationSeconds;
+    private Double timerDurationSeconds;
 }

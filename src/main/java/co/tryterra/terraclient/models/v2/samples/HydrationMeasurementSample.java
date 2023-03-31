@@ -30,5 +30,5 @@ import lombok.Setter;
 public class HydrationMeasurementSample {
     private String timestamp;
     @JsonProperty("hydration_kg")
-    private float hydrationKg;
+    private double hydrationKg;
 }

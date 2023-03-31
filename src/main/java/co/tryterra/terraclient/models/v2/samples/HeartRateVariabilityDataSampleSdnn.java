@@ -30,5 +30,5 @@ import lombok.Setter;
 public class HeartRateVariabilityDataSampleSdnn {
     private String timestamp;
     @JsonProperty("hrv_sdnn")
-    private float hrvSdnn;
+    private double hrvSdnn;
 }

@@ -28,5 +28,5 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OxygenSaturationSample {
     private String timestamp;
-    private float percentage;
+    private double percentage;
 }

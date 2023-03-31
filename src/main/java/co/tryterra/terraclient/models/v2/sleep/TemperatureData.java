@@ -27,5 +27,5 @@ import lombok.Setter;
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TemperatureData {
-    private Float delta;
+    private Double delta;
 }

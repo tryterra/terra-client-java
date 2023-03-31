@@ -30,7 +30,7 @@ import lombok.Setter;
 public class BloodPressureSample {
     private String timestamp;
     @JsonProperty("diastolic_bp")
-    private float diastolicBp;
+    private double diastolicBp;
     @JsonProperty("systolic_bp")
-    private float systolicBp;
+    private double systolicBp;
 }

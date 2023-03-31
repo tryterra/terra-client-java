@@ -35,7 +35,7 @@ public class Meal {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Quantity {
         private Integer unit;
-        private Float amount;
+        private Double amount;
     }
 
     private String name;

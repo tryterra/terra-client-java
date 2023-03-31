@@ -30,5 +30,5 @@ import lombok.Setter;
 public class BreathSample {
     private String timestamp;
     @JsonProperty("breaths_per_min")
-    private float breathsPerMin;
+    private double breathsPerMin;
 }

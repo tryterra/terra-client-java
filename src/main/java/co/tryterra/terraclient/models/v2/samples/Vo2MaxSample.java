@@ -30,5 +30,5 @@ import lombok.Setter;
 public class Vo2MaxSample {
     private String timestamp;
     @JsonProperty("vo2max_ml_per_min_per_kg")
-    private float vo2MaxMlPerMinPerKg;
+    private double vo2MaxMlPerMinPerKg;
 }

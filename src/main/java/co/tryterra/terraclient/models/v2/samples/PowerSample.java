@@ -31,5 +31,5 @@ public class PowerSample {
     private String timestamp;
     private double watts;
     @JsonProperty("timer_duration_seconds")
-    private Float timerDurationSeconds;
+    private Double timerDurationSeconds;
 }
