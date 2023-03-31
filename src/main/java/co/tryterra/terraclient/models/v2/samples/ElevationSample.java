@@ -32,5 +32,5 @@ public class ElevationSample {
     @JsonProperty("elev_meters")
     private double elevMeters;
     @JsonProperty("timer_duration_seconds")
-    private Float timerDurationSeconds;
+    private Double timerDurationSeconds;
 }

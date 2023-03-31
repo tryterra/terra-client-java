@@ -32,5 +32,5 @@ public class CadenceSample {
     @JsonProperty("cadence_rpm")
     private double cadenceRpm;
     @JsonProperty("timer_duration_seconds")
-    private Float timerDurationSeconds;
+    private Double timerDurationSeconds;
 }

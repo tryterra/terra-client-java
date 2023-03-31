@@ -32,5 +32,5 @@ public class SpeedSample {
     @JsonProperty("speed_meters_per_second")
     private double speedMetersPerSecond;
     @JsonProperty("timer_duration_seconds")
-    private Float timerDurationSeconds;
+    private Double timerDurationSeconds;
 }

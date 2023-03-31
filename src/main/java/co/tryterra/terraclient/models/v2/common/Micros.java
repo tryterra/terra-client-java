@@ -29,59 +29,59 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Micros {
     @JsonProperty("selenium_mg")
-    private Float seleniumMg;
+    private Double seleniumMg;
     @JsonProperty("niacin_mg")
-    private Float niacinMg;
+    private Double niacinMg;
     @JsonProperty("magnesium_mg")
-    private Float magnesiumMg;
+    private Double magnesiumMg;
     @JsonProperty("copper_mg")
-    private Float copperMg;
+    private Double copperMg;
     @JsonProperty("vitamin_B12_mg")
-    private Float vitaminB12Mg;
+    private Double vitaminB12Mg;
     @JsonProperty("vitamin_B6_mg")
-    private Float vitaminB6Mg;
+    private Double vitaminB6Mg;
     @JsonProperty("vitamin_C_mg")
-    private Float vitaminCMg;
+    private Double vitaminCMg;
     @JsonProperty("zinc_mg")
-    private Float zincMg;
+    private Double zincMg;
     @JsonProperty("vitamin_E_mg")
-    private Float vitaminEMg;
+    private Double vitaminEMg;
     @JsonProperty("manganese_mg")
-    private Float manganeseMg;
+    private Double manganeseMg;
     @JsonProperty("vitamin_D_mg")
-    private Float vitaminDMg;
+    private Double vitaminDMg;
     @JsonProperty("iodine_mg")
-    private Float iodineMg;
+    private Double iodineMg;
     @JsonProperty("chloride_mg")
-    private Float chlorideMg;
+    private Double chlorideMg;
     @JsonProperty("folate_mg")
-    private Float folateMg;
+    private Double folateMg;
     @JsonProperty("calcium_mg")
-    private Float calciumMg;
+    private Double calciumMg;
     @JsonProperty("molybdenum_mg")
-    private Float molybdenumMg;
+    private Double molybdenumMg;
     @JsonProperty("vitamin_A_mg")
-    private Float vitaminAMg;
+    private Double vitaminAMg;
     @JsonProperty("riboflavin_mg")
-    private Float riboflavinMg;
+    private Double riboflavinMg;
     @JsonProperty("folic_acid_mg")
-    private Float folicAcidMg;
+    private Double folicAcidMg;
     @JsonProperty("iron_mg")
-    private Float ironMg;
+    private Double ironMg;
     @JsonProperty("thiamin_mg")
-    private Float thiaminMg;
+    private Double thiaminMg;
     @JsonProperty("pantothenic_acid_mg")
-    private Float pantothenicAcid_mg;
+    private Double pantothenicAcid_mg;
     @JsonProperty("caffeine_mg")
-    private Float caffeineMg;
+    private Double caffeineMg;
     @JsonProperty("vitamin_K_mg")
-    private Float vitaminKMg;
+    private Double vitaminKMg;
     @JsonProperty("chromium_mg")
-    private Float chromiumMg;
+    private Double chromiumMg;
     @JsonProperty("potassium_mg")
-    private Float potassiumMg;
+    private Double potassiumMg;
     @JsonProperty("biotin_mg")
-    private Float biotinMg;
+    private Double biotinMg;
     @JsonProperty("phosphorus_mg")
-    private Float phosphorusMg;
+    private Double phosphorusMg;
 }

@@ -31,31 +31,31 @@ public class MeasurementDataSample {
     @JsonProperty("measurement_time")
     private String measurementTime;
     @JsonProperty("BMI")
-    private Float bmi;
+    private Double bmi;
     @JsonProperty("BMR")
-    private Float bmr;
+    private Double bmr;
     @JsonProperty("RMR")
-    private Float rmr;
+    private Double rmr;
     @JsonProperty("estimated_fitness_age")
     private Integer estimatedFitnessAge;
     @JsonProperty("skin_fold_mm")
-    private Float skinFoldMm;
+    private Double skinFoldMm;
     @JsonProperty("bodyfat_percentage")
-    private Float bodyfatPercentage;
+    private Double bodyfatPercentage;
     @JsonProperty("weight_kg")
-    private Float weightKg;
+    private Double weightKg;
     @JsonProperty("height_cm")
-    private Float heightCm;
+    private Double heightCm;
     @JsonProperty("bone_mass_g")
-    private Float boneMassG;
+    private Double boneMassG;
     @JsonProperty("muscle_mass_g")
-    private Float muscleMassG;
+    private Double muscleMassG;
     @JsonProperty("lean_mass_g")
-    private Float leanMassG;
+    private Double leanMassG;
     @JsonProperty("water_percentage")
-    private Float waterPercentage;
+    private Double waterPercentage;
     @JsonProperty("insulin_units")
-    private Float insulinUnits;
+    private Double insulinUnits;
     @JsonProperty("insulin_type")
     private String insulinType;
     @JsonProperty("urine_color")

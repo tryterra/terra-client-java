@@ -39,11 +39,11 @@ public class RespirationData {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BreathsData {
         @JsonProperty("min_breaths_per_min")
-        private Float minBreathsPerMin;
+        private Double minBreathsPerMin;
         @JsonProperty("avg_breaths_per_min")
-        private Float avgBreathsPerMin;
+        private Double avgBreathsPerMin;
         @JsonProperty("max_breaths_per_min")
-        private Float maxBreathsPerMin;
+        private Double maxBreathsPerMin;
         @JsonProperty("on_demand_reading")
         private Boolean onDemandReading;
         @JsonProperty("start_time")

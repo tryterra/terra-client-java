@@ -30,5 +30,5 @@ import lombok.Setter;
 public class PulseVelocitySample {
     private String timestamp;
     @JsonProperty("pulse_wave_velocity_meters_per_second")
-    private float pulseWaveVelocityMetersPerSecond;
+    private double pulseWaveVelocityMetersPerSecond;
 }

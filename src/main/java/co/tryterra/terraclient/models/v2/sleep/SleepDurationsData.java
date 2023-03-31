@@ -81,7 +81,7 @@ public class SleepDurationsData {
     }
 
     @JsonProperty("sleep_efficiency")
-    private Float sleepEfficiency;
+    private Double sleepEfficiency;
     private Other other;
     private Awake awake;
     private Asleep asleep;
