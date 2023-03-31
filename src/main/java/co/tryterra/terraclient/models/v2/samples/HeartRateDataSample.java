@@ -28,5 +28,5 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HeartRateDataSample {
     private String timestamp;
-    private int bpm;
+    private Double bpm;
 }

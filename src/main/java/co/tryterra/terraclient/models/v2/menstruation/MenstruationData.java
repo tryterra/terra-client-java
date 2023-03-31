@@ -16,12 +16,15 @@
 
 package co.tryterra.terraclient.models.v2.menstruation;
 
+import co.tryterra.terraclient.models.v2.samples.MenstruationFlowSample;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -48,4 +51,6 @@ public class MenstruationData {
     private Integer cycleLengthDays;
     @JsonProperty("is_predicted_cycle")
     private String isPredictedCycle;
+    @JsonProperty("menstruation_flow")
+    private List<MenstruationFlowSample> menstruationFlow;
 }

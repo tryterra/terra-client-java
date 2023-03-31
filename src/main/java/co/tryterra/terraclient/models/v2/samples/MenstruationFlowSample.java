@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package co.tryterra.terraclient.models.v2.daily;
+package co.tryterra.terraclient.models.v2.samples;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
@@ -22,13 +22,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Data
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ScoresData {
-    private Double recovery;
-    private Double sleep;
-    private Double activity;
+public class MenstruationFlowSample {
+    private String timestamp;
+    private Integer flow;
 }

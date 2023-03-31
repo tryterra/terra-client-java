@@ -18,9 +18,11 @@ package co.tryterra.terraclient.models.v2.body;
 
 import co.tryterra.terraclient.models.v2.common.HeartRateData;
 import co.tryterra.terraclient.models.v2.samples.AfibClassificationSample;
+import co.tryterra.terraclient.models.v2.samples.ECGReading;
 import co.tryterra.terraclient.models.v2.samples.PulseVelocitySample;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,4 +41,6 @@ public class HeartData {
     private List<AfibClassificationSample> afibClassificationSamples;
     @JsonProperty("pulse_wave_velocity_samples")
     private List<PulseVelocitySample> pulseWaveVelocitySamples;
+    @JsonProperty("ecg_signal")
+    private List<ECGReading> ecgSignal;
 }

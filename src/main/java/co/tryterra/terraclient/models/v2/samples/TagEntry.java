@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package co.tryterra.terraclient.models.v2.daily;
+package co.tryterra.terraclient.models.v2.samples;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Data
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ScoresData {
-    private Double recovery;
-    private Double sleep;
-    private Double activity;
+public class TagEntry {
+    private String timestamp;
+    @JsonProperty("tag_name")
+    private String tagName;
+    private String notes;
 }
