@@ -30,5 +30,5 @@ import java.util.List;
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TagData {
-    private TagEntry tags;
+    private List<TagEntry> tags;
 }
