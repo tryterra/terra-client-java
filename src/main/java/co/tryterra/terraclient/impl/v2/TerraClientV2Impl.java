@@ -70,6 +70,16 @@ public class TerraClientV2Impl implements TerraClientV2 {
     }
 
     @Override
+    public Future<TerraApiResponse<Void>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
+        return restClient.generateAuthenticationURL(resource, reference_id, auth_success_redirect_url, auth_failure_redirect_url);
+    }
+
+    @Override
+    public Future<TerraApiResponse<Void>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language, boolean show_disconnect) {
+        return restClient.generateWidgetSession(providers, reference_id, auth_success_redirect_url, auth_failure_redirect_url, language, show_disconnect);
+    }
+
+    @Override
     public Future<TerraApiResponse<Void>> deauthenticateUser(PartialUser user) {
         return restClient.deauthenticateUser(user);
     }
