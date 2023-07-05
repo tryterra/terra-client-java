@@ -136,7 +136,7 @@ public class RestClientV2 {
                 .build();
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, AuthenticationResponse.class);
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
     }
 
     Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id) {
@@ -146,7 +146,7 @@ public class RestClientV2 {
                 .build();
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, AuthenticationResponse.class);
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
     }
 
     Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url) {
@@ -157,7 +157,7 @@ public class RestClientV2 {
                 .build();
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, AuthenticationResponse.class);
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
     }
 
 
@@ -170,7 +170,7 @@ public class RestClientV2 {
                 .build();
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, AuthenticationResponse.class);
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
     }
 
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers) {
@@ -180,7 +180,7 @@ public class RestClientV2 {
 
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, GenerateWidgetResponse.class);
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
     }
 
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id) {
@@ -191,7 +191,7 @@ public class RestClientV2 {
 
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, GenerateWidgetResponse.class);
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
     }
 
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url) {
@@ -203,7 +203,7 @@ public class RestClientV2 {
 
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, GenerateWidgetResponse.class);
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
     }
 
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
@@ -216,7 +216,7 @@ public class RestClientV2 {
 
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, GenerateWidgetResponse.class);
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
     }
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language) {
         var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
@@ -229,7 +229,7 @@ public class RestClientV2 {
 
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, GenerateWidgetResponse.class);
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
     }
 
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language, boolean show_disconnect) {
@@ -244,7 +244,7 @@ public class RestClientV2 {
 
         RequestBody body = RequestBody.create(new byte[0]);
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
-        return performAsyncCall(request, null, null, GenerateWidgetResponse.class);
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
     }
 
     Future<TerraApiResponse<Void>> deauthenticateUser(PartialUser user) {
