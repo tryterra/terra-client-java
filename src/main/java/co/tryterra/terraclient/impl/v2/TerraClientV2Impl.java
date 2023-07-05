@@ -23,12 +23,15 @@ import co.tryterra.terraclient.api.TerraClientV2;
 import co.tryterra.terraclient.api.User;
 import co.tryterra.terraclient.impl.PartialUserImpl;
 import co.tryterra.terraclient.models.Athlete;
+import co.tryterra.terraclient.models.GenerateWidgetResponse;
+import co.tryterra.terraclient.models.AuthenticationResponse;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
 import co.tryterra.terraclient.models.v2.menstruation.Menstruation;
 import co.tryterra.terraclient.models.v2.nutrition.Nutrition;
 import co.tryterra.terraclient.models.v2.sleep.Sleep;
+
 
 import java.time.Instant;
 import java.util.Objects;
@@ -70,12 +73,52 @@ public class TerraClientV2Impl implements TerraClientV2 {
     }
 
     @Override
-    public Future<TerraApiResponse<Void>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
+    public Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource) {
+        return restClient.generateAuthenticationURL(resource);
+    }
+
+    @Override
+    public Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id) {
+        return restClient.generateAuthenticationURL(resource, reference_id);
+    }
+
+    @Override
+    public Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url) {
+        return restClient.generateAuthenticationURL(resource, reference_id, auth_success_redirect_url);
+    }
+
+    @Override
+    public Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
         return restClient.generateAuthenticationURL(resource, reference_id, auth_success_redirect_url, auth_failure_redirect_url);
     }
 
     @Override
-    public Future<TerraApiResponse<Void>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language, boolean show_disconnect) {
+    public Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers) {
+        return restClient.generateWidgetSession(providers);
+    }
+
+    @Override
+    public Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id) {
+        return restClient.generateWidgetSession(providers, reference_id);
+    }
+
+    @Override
+    public Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url) {
+        return restClient.generateWidgetSession(providers, reference_id, auth_success_redirect_url);
+    }
+
+    @Override
+    public Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
+        return restClient.generateWidgetSession(providers, reference_id, auth_success_redirect_url, auth_failure_redirect_url);
+    }
+
+    @Override
+    public Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language) {
+        return restClient.generateWidgetSession(providers, reference_id, auth_success_redirect_url, auth_failure_redirect_url, language);
+    }
+
+    @Override
+    public Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language, boolean show_disconnect) {
         return restClient.generateWidgetSession(providers, reference_id, auth_success_redirect_url, auth_failure_redirect_url, language, show_disconnect);
     }
 
