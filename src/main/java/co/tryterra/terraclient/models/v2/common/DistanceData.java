@@ -72,10 +72,13 @@ public class DistanceData {
 
         @JsonProperty("floors_climbed")
         private Integer floorsClimbed;
+        @JsonProperty("steps")
         private Integer steps;
         @JsonProperty("distance_meters")
         private Double distanceMeters;
+        @JsonProperty("swimming")
         private Swimming swimming;
+        @JsonProperty("elevation")
         private Elevation elevation;
     }
 

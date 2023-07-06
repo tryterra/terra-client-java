@@ -100,7 +100,7 @@ public interface TerraClientV2 {
      * will be returned with the API response.
      *
      * @param resource the resource to authenticate a user for
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @return future that will contain the API response upon completion
      */
     Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id);
@@ -113,7 +113,7 @@ public interface TerraClientV2 {
      * will be returned with the API response.
      *
      * @param resource the resource to authenticate a user for
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @return future that will contain the API response upon completion
      */
@@ -127,7 +127,7 @@ public interface TerraClientV2 {
      * will be returned with the API response.
      *
      * @param resource the resource to authenticate a user for
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @param auth_failure_redirect_url is the URL for user redirection upon unsuccessful auth (supports deeplinks)
      * @return future that will contain the API response upon completion
@@ -152,7 +152,7 @@ public interface TerraClientV2 {
      * If successful, the response will have a 200 status code with the widget session link.
      *
      * @param providers the resources on widget for a user connect to
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @return future that will contain the API response upon completion
      */
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id);
@@ -164,7 +164,7 @@ public interface TerraClientV2 {
      * If successful, the response will have a 200 status code with the widget session link.
      *
      * @param providers the resources on widget for a user connect to
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @return future that will contain the API response upon completion
      */
@@ -177,7 +177,7 @@ public interface TerraClientV2 {
      * If successful, the response will have a 200 status code with the widget session link.
      *
      * @param providers the resources on widget for a user connect to
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @param auth_failure_redirect_url is the URL for user redirection upon unsuccessful auth (supports deeplinks)
      * @return future that will contain the API response upon completion
@@ -191,7 +191,7 @@ public interface TerraClientV2 {
      * If successful, the response will have a 200 status code with the widget session link.
      *
      * @param providers the resources on widget for a user connect to
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @param auth_failure_redirect_url is the URL for user redirection upon unsuccessful auth (supports deeplinks)
      * @param language is the language you would like the widget to be displayed in
@@ -206,7 +206,7 @@ public interface TerraClientV2 {
      * If successful, the response will have a 200 status code with the widget session link.
      *
      * @param providers the resources on widget for a user connect to
-     * @param referece_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
+     * @param reference_id the identifier to associate with the user being authenticated. This can be used to reconcile the user with your internal systems.
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @param auth_failure_redirect_url is the URL for user redirection upon unsuccessful auth (supports deeplinks)
      * @param language is the language you would like the widget to be displayed in
