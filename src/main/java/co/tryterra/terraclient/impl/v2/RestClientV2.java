@@ -24,16 +24,21 @@ import co.tryterra.terraclient.impl.OkHttp3AsyncCall;
 import co.tryterra.terraclient.impl.ResponseBodyParser;
 import co.tryterra.terraclient.impl.UserImpl;
 import co.tryterra.terraclient.models.Athlete;
+import co.tryterra.terraclient.models.AuthenticationResponse;
+import co.tryterra.terraclient.models.GenerateWidgetResponse;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
 import co.tryterra.terraclient.models.v2.menstruation.Menstruation;
 import co.tryterra.terraclient.models.v2.nutrition.Nutrition;
 import co.tryterra.terraclient.models.v2.sleep.Sleep;
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -125,11 +130,128 @@ public class RestClientV2 {
         return performAsyncCall(request, null, "user", UserImpl.class);
     }
 
+    Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource) {
+        var url = HttpUrl.parse(baseUrl + "/auth/authenticateUser").newBuilder()
+                .addQueryParameter("resource", resource)
+                .build();
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
+    }
+
+    Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id) {
+        var url = HttpUrl.parse(baseUrl + "/auth/authenticateUser").newBuilder()
+                .addQueryParameter("resource", resource)
+                .addQueryParameter("reference_id", reference_id)
+                .build();
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
+    }
+
+    Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url) {
+        var url = HttpUrl.parse(baseUrl + "/auth/authenticateUser").newBuilder()
+                .addQueryParameter("resource", resource)
+                .addQueryParameter("reference_id", reference_id)
+                .addQueryParameter("auth_success_redirect_url", auth_success_redirect_url)
+                .build();
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
+    }
+
+
+    Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
+        var url = HttpUrl.parse(baseUrl + "/auth/authenticateUser").newBuilder()
+                .addQueryParameter("resource", resource)
+                .addQueryParameter("reference_id", reference_id)
+                .addQueryParameter("auth_success_redirect_url", auth_success_redirect_url)
+                .addQueryParameter("auth_failure_redirect_url", auth_failure_redirect_url)
+                .build();
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "auth_url", AuthenticationResponse.class);
+    }
+
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers) {
+        var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
+                .addQueryParameter("providers", providers)
+                .build();
+
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
+    }
+
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id) {
+        var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
+                .addQueryParameter("providers", providers)
+                .addQueryParameter("reference_id", reference_id)
+                .build();
+
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
+    }
+
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url) {
+        var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
+                .addQueryParameter("providers", providers)
+                .addQueryParameter("reference_id", reference_id)
+                .addQueryParameter("auth_success_redirect_url", auth_success_redirect_url)
+                .build();
+
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
+    }
+
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url) {
+        var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
+                .addQueryParameter("providers", providers)
+                .addQueryParameter("reference_id", reference_id)
+                .addQueryParameter("auth_success_redirect_url", auth_success_redirect_url)
+                .addQueryParameter("auth_failure_redirect_url", auth_failure_redirect_url)
+                .build();
+
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
+    }
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language) {
+        var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
+                .addQueryParameter("providers", providers)
+                .addQueryParameter("reference_id", reference_id)
+                .addQueryParameter("auth_success_redirect_url", auth_success_redirect_url)
+                .addQueryParameter("auth_failure_redirect_url", auth_failure_redirect_url)
+                .addQueryParameter("language", language) 
+                .build();
+
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
+    }
+
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language, boolean show_disconnect) {
+        var url = HttpUrl.parse(baseUrl + "/auth/generateWidgetSession").newBuilder()
+                .addQueryParameter("providers", providers)
+                .addQueryParameter("reference_id", reference_id)
+                .addQueryParameter("auth_success_redirect_url", auth_success_redirect_url)
+                .addQueryParameter("auth_failure_redirect_url", auth_failure_redirect_url)
+                .addQueryParameter("language", language) 
+                .addQueryParameter("show_disconnect", Boolean.toString(show_disconnect))
+                .build();
+
+        RequestBody body = RequestBody.create(new byte[0]);
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).post(body).build();
+        return performAsyncCall(request, null, "url", GenerateWidgetResponse.class);
+    }
+
     Future<TerraApiResponse<Void>> deauthenticateUser(PartialUser user) {
         var url = HttpUrl.parse(baseUrl + "/auth/deauthenticateUser").newBuilder()
                 .addQueryParameter("user_id", user.getId())
                 .build();
-        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).build();
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).delete().build();
         return performAsyncCall(request, null, null, Void.class);
     }
 
