@@ -25,6 +25,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Data
 @NoArgsConstructor
 @Setter(AccessLevel.NONE)
@@ -38,7 +39,7 @@ public class Daily {
     @JsonProperty("device_data")
     private DeviceData deviceData;
     @JsonProperty("distance_data")
-    private DistanceData distanceData;
+    private DailyDistanceData distanceData;
     @JsonProperty("MET_data")
     private MetData metData;
     @JsonProperty("scores")
