@@ -143,7 +143,7 @@ public interface TerraClientV2 {
      * @param providers the resources on widget for a user connect to
      * @return future that will contain the API response upon completion
      */
-    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providersd);
+    Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers);
     
     /**
      * Asynchronously makes a request to the {@code /auth/generateWidgetSession} endpoint to
@@ -210,7 +210,7 @@ public interface TerraClientV2 {
      * @param auth_success_redirect_url is the URL for user redirection upon successful auth (supports deeplinks)
      * @param auth_failure_redirect_url is the URL for user redirection upon unsuccessful auth (supports deeplinks)
      * @param language is the language you would like the widget to be displayed in
-     * @param show_disconenct is whether to show the disconnect button once the user is connected
+     * @param show_disconnect is whether to show the disconnect button once the user is connected
      * @return future that will contain the API response upon completion
      */
     Future<TerraApiResponse<GenerateWidgetResponse>> generateWidgetSession(String providers, String reference_id, String auth_success_redirect_url, String auth_failure_redirect_url, String language, boolean show_disconnect);
