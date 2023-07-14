@@ -43,7 +43,7 @@ public class Activity {
     private HeartRateData heartRateData;
     @JsonProperty("lap_data")
     private LapData lapData;
-    @JsonProperty("meta_data")
+    @JsonProperty("metadata")
     private Metadata metadata;
     @JsonProperty("MET_data")
     private MetData metData;
