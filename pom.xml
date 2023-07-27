@@ -194,10 +194,31 @@
                 <version>${maven-javadoc-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>attach-javadoc</id>
+                        <id>html-javadoc</id>
+                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>javadoc</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>markdown-javadoc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <configuration>
+                            <doclet>co.tryterra.markdowndoclet.MarkdownDoclet</doclet>
+                            <docletArtifact>
+                                <groupId>co.tryterra</groupId>
+                                <artifactId>markdown-doclet</artifactId>
+                                <version>1.0.0</version>
+                            </docletArtifact>
+                            <useStandardDocletOptions>false</useStandardDocletOptions>
+                            <additionalOptions>
+                                <option>--package-name co.tryterra.terraclient</option>
+                                <option>--exclude co.tryterra.terraclient.models</option>
+                            </additionalOptions>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
