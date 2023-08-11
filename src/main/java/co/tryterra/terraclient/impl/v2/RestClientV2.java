@@ -26,6 +26,7 @@ import co.tryterra.terraclient.impl.UserImpl;
 import co.tryterra.terraclient.models.Athlete;
 import co.tryterra.terraclient.models.AuthenticationResponse;
 import co.tryterra.terraclient.models.GenerateWidgetResponse;
+import co.tryterra.terraclient.models.ProvidersResponse;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
@@ -128,6 +129,13 @@ public class RestClientV2 {
                 .build();
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).build();
         return performAsyncCall(request, null, "user", UserImpl.class);
+    }
+
+    Future<TerraApiResponse<ProvidersResponse>> listProviders() {
+        var url = HttpUrl.parse(baseUrl + "/integrations").newBuilder()
+                .build();
+        var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).build();
+        return performAsyncCall(request, null, null, ProvidersResponse.class);
     }
 
     Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource) {

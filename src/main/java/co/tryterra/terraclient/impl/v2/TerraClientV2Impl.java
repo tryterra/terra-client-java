@@ -25,6 +25,7 @@ import co.tryterra.terraclient.impl.PartialUserImpl;
 import co.tryterra.terraclient.models.Athlete;
 import co.tryterra.terraclient.models.GenerateWidgetResponse;
 import co.tryterra.terraclient.models.AuthenticationResponse;
+import co.tryterra.terraclient.models.ProvidersResponse;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
@@ -72,6 +73,11 @@ public class TerraClientV2Impl implements TerraClientV2 {
         return this.getUser(user.getId());
     }
 
+    @Override
+    public Future<TerraApiResponse<ProvidersResponse>> listProviders() {
+        return restClient.listProviders();
+    }
+    
     @Override
     public Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource) {
         return restClient.generateAuthenticationURL(resource);
