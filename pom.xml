@@ -5,7 +5,7 @@
 
     <groupId>co.tryterra</groupId>
     <artifactId>terra-client</artifactId>
-    <version>0.0.17</version>
+    <version>0.0.18</version>
 
     <organization>
         <name>Terra Enabling Developers</name>
