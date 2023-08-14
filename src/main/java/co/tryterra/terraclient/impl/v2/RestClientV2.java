@@ -135,7 +135,7 @@ public class RestClientV2 {
         var url = HttpUrl.parse(baseUrl + "/integrations").newBuilder()
                 .build();
         var request = addAuthHeadersToBuilder(new Request.Builder()).url(url).build();
-        return performAsyncCall(request, null, null, ProvidersResponse.class);
+        return performAsyncCall(request, null, "listProvidersAPIRoot", ProvidersResponse.class);
     }
 
     Future<TerraApiResponse<AuthenticationResponse>> generateAuthenticationURL(String resource) {
