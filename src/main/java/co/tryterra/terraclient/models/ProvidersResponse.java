@@ -14,8 +14,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProvidersResponse {
     @JsonProperty("providers")
-    private List<String> Provider;
+    private List<String> providers;
     @JsonProperty("sdk_providers")
-    private List<String> SdkProviders;
+    private List<String> sdkProviders;
     private String status;
 }
