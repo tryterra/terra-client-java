@@ -88,6 +88,15 @@ public class ResponseBodyParser<T> {
             newUser = new UserImpl(rawBody.get("user"), null, null, null, null, null);
         }
 
+        if (key == "listProvidersAPIRoot") {
+            try {
+                var parsed = List.of(restClient.getObjectMapper().treeToValue(rawBody, parseTo)); 
+                return new ParsedResponse<>(rawBody, parsed, newUser);
+            } catch (JsonProcessingException ex) {
+                throw new BodyParsingException(ex);
+            }
+        }
+
         if (rawBody.get(key) == null) {
             return new ParsedResponse<>(rawBody, null, newUser);
         }

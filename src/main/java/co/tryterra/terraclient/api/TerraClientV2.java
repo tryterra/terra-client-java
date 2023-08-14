@@ -21,6 +21,7 @@ import co.tryterra.terraclient.api.annotations.Nullable;
 import co.tryterra.terraclient.models.Athlete;
 import co.tryterra.terraclient.models.AuthenticationResponse;
 import co.tryterra.terraclient.models.GenerateWidgetResponse;
+import co.tryterra.terraclient.models.ProvidersResponse;
 import co.tryterra.terraclient.models.v2.activity.Activity;
 import co.tryterra.terraclient.models.v2.body.Body;
 import co.tryterra.terraclient.models.v2.daily.Daily;
@@ -81,6 +82,14 @@ public interface TerraClientV2 {
      */
     Future<? extends TerraApiResponse<? extends User>> getUser(PartialUser user);
 
+    /**
+     * Asynchronously makes a request to the {@code /integrations} endpoint to fetch a list of all available providers.
+     * <br>
+     *
+     * @return future that will contain the fetched {@link ProvidersResponse} upon completion
+     */
+    Future<TerraApiResponse<ProvidersResponse>> listProviders();
+    
     /**
      * Asynchronously makes a request to the {@code /auth/authenticateUser} endpoint to
      * authenticate a user for the specified resource
