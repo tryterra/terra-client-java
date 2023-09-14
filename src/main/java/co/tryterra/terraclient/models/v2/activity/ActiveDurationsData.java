@@ -47,4 +47,8 @@ public class ActiveDurationsData {
     private Integer numContinuousInactivePeriods;
     @JsonProperty("activity_levels_samples")
     private List<ActivityLevelSample> activityLevelsSamples;
+    @JsonProperty("standing_seconds")
+    private Double standingSeconds;
+    @JsonProperty("standing_hours_count")
+    private Double standingHoursCount;
 }
