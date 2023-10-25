@@ -16,12 +16,15 @@
 
 package co.tryterra.terraclient.models;
 
+import co.tryterra.terraclient.models.v2.common.DeviceData;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -42,4 +45,8 @@ public class Athlete {
     private String state;
     private String country;
     private Integer age;
+    @JsonProperty("joined_providers")
+    private String joinedProviders;
+    @JsonProperty("device_data")
+    private List<DeviceData> deviceData;
 }
