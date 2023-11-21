@@ -38,7 +38,7 @@ public class LapSample {
     @JsonProperty("total_strokes")
     private Double totalStrokes;
     @JsonProperty("stroke_type")
-    private Integer strokeType;
+    private String strokeType;
     @JsonProperty("avg_speed_meters_per_second")
     private Double avgSpeedMetersPerSecond;
 }
