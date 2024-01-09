@@ -9,6 +9,8 @@ The official [Terra](https://tryterra.co) Java client library.
 
 ## Installation
 
+- Check the latest version available on https://mvnrepository.com/artifact/co.tryterra/terra-client
+
 ### Requirements
 
 - Java 11 or later
