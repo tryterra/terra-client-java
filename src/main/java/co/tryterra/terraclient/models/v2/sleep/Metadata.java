@@ -34,4 +34,10 @@ public class Metadata {
     private String endTime;
     @JsonProperty("upload_type")
     private int uploadType;
+    @JsonProperty("is_nap")
+    private boolean isNap;
+    @JsonProperty("timestamp_localization")
+    private int timestampLocalization;
+    @JsonProperty("summary_id")
+    private String summaryId;
 }
