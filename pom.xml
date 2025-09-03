@@ -57,7 +57,7 @@
         <!-- Dependency versions -->
         <lombok.version>1.18.24</lombok.version>
         <jackson-databind.version>2.13.3</jackson-databind.version>
-        <okhttp.version>4.10.0</okhttp.version>
+        <okhttp.version>4.12.0</okhttp.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
         <logback-classic.version>1.2.11</logback-classic.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
